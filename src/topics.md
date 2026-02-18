@@ -13,6 +13,12 @@ Research topics monitored by the YRSN Research Monitor.
 </div>
 
 ```js
+// Loading indicator
+const loadingDiv = html`<div class="loading-container">
+  <div class="spinner"></div>
+  <p>Loading topic treemap...</p>
+</div>`;
+
 const papers = await FileAttachment("data/papers.json").json();
 import * as d3 from "npm:d3";
 
@@ -564,6 +570,36 @@ ${highValuePapers.length > 0 ? html`
 </div>
 
 <style>
+/* Loading Indicator */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  gap: 1rem;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--theme-background-alt);
+  border-top: 4px solid #2E86AB;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .dataset-info {
   background: var(--theme-background-alt);
   border-radius: 8px;
@@ -572,6 +608,7 @@ ${highValuePapers.length > 0 ? html`
   border-left: 4px solid #2E86AB;
   font-size: 0.9rem;
   color: var(--theme-foreground-muted);
+  animation: fadeIn 0.6s ease-out;
 }
 
 .dataset-info p {
@@ -581,6 +618,68 @@ ${highValuePapers.length > 0 ? html`
 .dataset-info strong {
   color: var(--theme-foreground);
   font-weight: 600;
+}
+
+/* Mobile Responsiveness for Topics */
+@media (max-width: 768px) {
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 400px;
+  }
+
+  .stat-card h3 {
+    font-size: 0.8rem;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  .breadcrumbs {
+    font-size: 0.85rem;
+  }
+
+  .info-banner {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .info-banner ul {
+    font-size: 0.85rem;
+  }
+
+  .legend-gradient {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  canvas {
+    min-height: 300px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .breadcrumb-container {
+    padding: 0.75rem 1rem;
+  }
+
+  .dataset-info {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
 }
 </style>
 
