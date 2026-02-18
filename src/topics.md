@@ -3,12 +3,25 @@
 Research topics monitored by the YRSN Research Monitor.
 
 <div class="info-banner">
-  <strong>How to use:</strong> Click on any topic category (the labeled areas) to drill down into subtopics and papers. Use the breadcrumb trail above the visualization to navigate back up. Colors represent relevance scores (orange = low, blue = high).
+  <strong>Interactive Treemap Navigation:</strong>
+  <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0;">
+    <li><strong>Click category headers</strong> to drill down into subtopics and papers</li>
+    <li><strong>Use breadcrumbs</strong> above to navigate back up the hierarchy (or press <kbd>ESC</kbd>)</li>
+    <li><strong>Hover over papers</strong> to see relevance scores and details</li>
+    <li><strong>Colors:</strong> Orange (low relevance) → Green (medium) → Blue (high relevance)</li>
+  </ul>
 </div>
 
 ```js
 const papers = await FileAttachment("data/papers.json").json();
 import * as d3 from "npm:d3";
+
+// Performance stats for debugging large datasets
+const perfStats = {
+  totalPapers: papers.summary.totalPapers,
+  totalReviews: papers.reviews.length,
+  loadTime: Date.now()
+};
 ```
 
 ```js
@@ -85,7 +98,7 @@ function classifyPaper(review) {
   return matches;
 }
 
-// Build hierarchical data structure
+// Build hierarchical data structure (optimized for thousands of papers)
 function buildHierarchy() {
   const root = {
     name: "All Topics",
@@ -93,36 +106,68 @@ function buildHierarchy() {
   };
 
   const topicMap = new Map();
+  const subtopicCache = new Map();
 
-  // Process each review
+  // Process each review with optimized lookups
   papers.reviews.forEach(review => {
     const classifications = classifyPaper(review);
 
     classifications.forEach(({topic, subtopic}) => {
-      // Get or create topic
-      let topicNode = topicMap.get(topic);
-      if (!topicNode) {
-        topicNode = { name: topic, children: [] };
-        topicMap.set(topic, topicNode);
-        root.children.push(topicNode);
-      }
+      const cacheKey = `${topic}::${subtopic}`;
 
-      // Get or create subtopic
-      let subtopicNode = topicNode.children.find(c => c.name === subtopic);
+      // Check cache first
+      let subtopicNode = subtopicCache.get(cacheKey);
+
       if (!subtopicNode) {
-        subtopicNode = { name: subtopic, children: [] };
-        topicNode.children.push(subtopicNode);
+        // Get or create topic
+        let topicNode = topicMap.get(topic);
+        if (!topicNode) {
+          topicNode = { name: topic, children: [] };
+          topicMap.set(topic, topicNode);
+          root.children.push(topicNode);
+        }
+
+        // Get or create subtopic
+        subtopicNode = topicNode.children.find(c => c.name === subtopic);
+        if (!subtopicNode) {
+          subtopicNode = { name: subtopic, children: [] };
+          topicNode.children.push(subtopicNode);
+        }
+
+        subtopicCache.set(cacheKey, subtopicNode);
       }
 
-      // Add paper
+      // Add paper with shortened display name for better rendering
+      const displayName = review.arxivId
+        ? review.arxivId.replace(/^(\d{4})\.(\d+)v.*$/, '$1.$2')
+        : review.filename.substring(0, 15);
+
       subtopicNode.children.push({
-        name: review.arxivId || review.filename,
+        name: displayName,
         value: 1,
-        relevance: review.relevanceScore || 0,
+        relevance: review.relevanceScore,
         type: review.type,
         filename: review.filename,
+        arxivId: review.arxivId,
       });
     });
+  });
+
+  // Sort children by relevance and count for better layout
+  root.children.forEach(topic => {
+    topic.children.forEach(subtopic => {
+      subtopic.children.sort((a, b) => {
+        const relA = a.relevance || 0;
+        const relB = b.relevance || 0;
+        return relB - relA; // Highest relevance first
+      });
+    });
+    topic.children.sort((a, b) => b.children.length - a.children.length);
+  });
+  root.children.sort((a, b) => {
+    const countA = a.children.reduce((sum, c) => sum + c.children.length, 0);
+    const countB = b.children.reduce((sum, c) => sum + c.children.length, 0);
+    return countB - countA;
   });
 
   return root;
@@ -168,10 +213,10 @@ const currentData = getCurrentData();
 </div>
 
 ```js
-// Treemap visualization with Canvas for performance
+// Treemap visualization with Canvas for performance (optimized for 1000s of papers)
 {
-  const width = 1000;
-  const height = 600;
+  const width = 1200;
+  const height = 700;
 
   // Create hierarchy and compute layout
   const root = d3.hierarchy(currentData)
@@ -180,101 +225,145 @@ const currentData = getCurrentData();
 
   const treemap = d3.treemap()
     .size([width, height])
-    .padding(2)
+    .paddingOuter(3)
+    .paddingInner(2)
+    .paddingTop(35)  // Make room for category headers
     .round(true);
 
   treemap(root);
 
-  // Color scale based on relevance
+  // Enhanced color scale with better visual distinction
   const colorScale = d3.scaleSequential()
     .domain([0, 10])
     .interpolator(d3.interpolateRgb("#F39237", "#2E86AB"));
 
-  // Create canvas
+  // Create container with canvas
+  const container = document.createElement("div");
+  container.style.position = "relative";
+  container.style.width = `${width}px`;
+  container.style.height = `${height}px`;
+
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
   canvas.style.cursor = "pointer";
+  canvas.style.display = "block";
   const ctx = canvas.getContext("2d");
 
-  // Store rectangles for hit detection
-  const rectangles = [];
+  // Store clickable areas for hit detection
+  const clickableAreas = [];
+  const paperRects = [];
 
-  // Draw treemap
+  // Optimized draw function
   function draw() {
     ctx.clearRect(0, 0, width, height);
-    rectangles.length = 0;
+    clickableAreas.length = 0;
+    paperRects.length = 0;
 
+    // Draw leaf nodes (papers) first
     root.leaves().forEach(d => {
       const x = d.x0;
       const y = d.y0;
       const w = d.x1 - d.x0;
       const h = d.y1 - d.y0;
 
-      // Only draw if visible
-      if (w > 1 && h > 1) {
-        // Color based on relevance score or default
-        const relevance = d.data.relevance || 5;
+      // Only draw if visible (minimum 2px)
+      if (w > 2 && h > 2) {
+        // Color based on relevance score with fallback
+        const relevance = d.data.relevance !== null && d.data.relevance !== undefined
+          ? d.data.relevance
+          : 5;
         ctx.fillStyle = colorScale(relevance);
         ctx.fillRect(x, y, w, h);
 
-        // Border
-        ctx.strokeStyle = "#fff";
-        ctx.lineWidth = 1;
+        // Border - thinner for better visibility at scale
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.lineWidth = 0.5;
         ctx.strokeRect(x, y, w, h);
 
-        // Text label if space allows
-        if (w > 60 && h > 30) {
-          ctx.fillStyle = "#fff";
-          ctx.font = "12px sans-serif";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-
-          const text = d.data.name.substring(0, 20);
-          ctx.fillText(text, x + w/2, y + h/2);
-
-          // Show relevance if scored
-          if (d.data.relevance > 0 && h > 50) {
-            ctx.font = "10px sans-serif";
-            ctx.fillText(`Score: ${d.data.relevance}`, x + w/2, y + h/2 + 15);
-          }
-        }
-
-        // Store for click detection
-        rectangles.push({
+        // Store for hover detection
+        paperRects.push({
           x, y, w, h,
           data: d.data,
-          parent: d.parent.data
+          parent: d.parent?.data
         });
       }
     });
 
-    // Draw group labels for non-leaf nodes (with semi-transparent background)
+    // Draw group headers with enhanced visibility
     root.descendants().forEach(d => {
-      if (d.children && d.depth < 2) {
+      if (d.children && d.depth >= 0) {
         const x = d.x0;
         const y = d.y0;
         const w = d.x1 - d.x0;
         const h = d.y1 - d.y0;
+        const headerHeight = 30;
 
-        if (w > 100 && h > 40) {
-          // Semi-transparent header background
-          ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
-          ctx.fillRect(x, y, w, Math.min(40, h));
+        if (w > 80 && h > headerHeight) {
+          // Gradient header background
+          const gradient = ctx.createLinearGradient(x, y, x, y + headerHeight);
+          gradient.addColorStop(0, "rgba(0, 0, 0, 0.85)");
+          gradient.addColorStop(1, "rgba(0, 0, 0, 0.65)");
+          ctx.fillStyle = gradient;
+          ctx.fillRect(x, y, w, headerHeight);
 
-          // Title
+          // Title text
           ctx.fillStyle = "#fff";
-          ctx.font = "bold 14px sans-serif";
+          ctx.font = "bold 13px -apple-system, system-ui, sans-serif";
           ctx.textAlign = "left";
           ctx.textBaseline = "top";
-          const title = d.data.name.length > 30 ? d.data.name.substring(0, 27) + "..." : d.data.name;
-          ctx.fillText(title, x + 5, y + 5);
 
-          // Count
+          const maxTitleWidth = w - 45;
+          let title = d.data.name;
+
+          // Smart truncation
+          ctx.font = "bold 13px -apple-system, system-ui, sans-serif";
+          let titleWidth = ctx.measureText(title).width;
+          while (titleWidth > maxTitleWidth && title.length > 3) {
+            title = title.substring(0, title.length - 1);
+            titleWidth = ctx.measureText(title + "...").width;
+          }
+          if (titleWidth > maxTitleWidth) {
+            title = title.substring(0, title.length - 3) + "...";
+          }
+
+          ctx.fillText(title, x + 8, y + 5);
+
+          // Count badge
           const count = d.leaves().length;
-          ctx.font = "11px sans-serif";
-          ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
-          ctx.fillText(`${count} paper${count !== 1 ? 's' : ''} • Click to explore`, x + 5, y + 23);
+          const countText = count.toString();
+          ctx.font = "11px -apple-system, system-ui, sans-serif";
+          const countWidth = ctx.measureText(countText).width;
+
+          // Badge background
+          const badgeX = x + w - countWidth - 20;
+          const badgeY = y + 4;
+          ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+          ctx.beginPath();
+          ctx.roundRect(badgeX, badgeY, countWidth + 12, 20, 10);
+          ctx.fill();
+
+          // Badge text
+          ctx.fillStyle = "#fff";
+          ctx.textAlign = "center";
+          ctx.fillText(countText, badgeX + (countWidth + 12) / 2, badgeY + 5);
+
+          // Click indicator
+          if (w > 150) {
+            ctx.font = "10px -apple-system, system-ui, sans-serif";
+            ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.textAlign = "left";
+            ctx.fillText("Click to drill down →", x + 8, y + 18);
+          }
+
+          // Store clickable area
+          if (d.data.name !== currentData.name) {
+            clickableAreas.push({
+              x, y, w, h: headerHeight,
+              name: d.data.name,
+              type: 'category'
+            });
+          }
         }
       }
     });
@@ -282,51 +371,105 @@ const currentData = getCurrentData();
 
   draw();
 
-  // Click handler for zooming
-  canvas.onclick = (event) => {
+  // Track mouse movement to prevent accidental clicks while dragging
+  let mouseDownPos = null;
+  canvas.onmousedown = (event) => {
     const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    // Check for group clicks first (for drilling down)
-    let clicked = false;
-    root.descendants().forEach(d => {
-      if (d.children && d.depth >= 0 && !clicked) {
-        const x0 = d.x0;
-        const y0 = d.y0;
-        const w = d.x1 - d.x0;
-        const h = d.y1 - d.y0;
-
-        // Check if click is in the header area (top 40px of group)
-        if (x >= x0 && x <= x0 + w && y >= y0 && y <= y0 + 40 && h > 40) {
-          if (d.data.name !== currentData.name) {
-            currentPath.value = [...currentPath, d.data.name];
-            clicked = true;
-          }
-        }
-      }
-    });
+    mouseDownPos = {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
+    };
   };
 
-  // Tooltip on hover
+  // Enhanced click handler with drag detection
+  canvas.onclick = (event) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = event.clientX - rect.left;
+    const my = event.clientY - rect.top;
+
+    // Prevent click if mouse moved more than 5px (likely a drag)
+    if (mouseDownPos) {
+      const dx = Math.abs(mx - mouseDownPos.x);
+      const dy = Math.abs(my - mouseDownPos.y);
+      if (dx > 5 || dy > 5) {
+        mouseDownPos = null;
+        return;
+      }
+    }
+    mouseDownPos = null;
+
+    // Check clickable category headers first
+    for (const area of clickableAreas) {
+      if (mx >= area.x && mx <= area.x + area.w &&
+          my >= area.y && my <= area.y + area.h) {
+        currentPath.value = [...currentPath, area.name];
+        return;
+      }
+    }
+  };
+
+  // Enhanced tooltip
+  let tooltip = null;
   canvas.onmousemove = (event) => {
     const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    const mx = event.clientX - rect.left;
+    const my = event.clientY - rect.top;
 
+    // Check for category headers first
     let found = false;
-    for (let i = rectangles.length - 1; i >= 0; i--) {
-      const r = rectangles[i];
-      if (x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h) {
-        canvas.title = `${r.data.name}\nRelevance: ${r.data.relevance || 'N/A'}\nType: ${r.data.type || 'N/A'}`;
+    for (const area of clickableAreas) {
+      if (mx >= area.x && mx <= area.x + area.w &&
+          my >= area.y && my <= area.y + area.h) {
+        canvas.style.cursor = "pointer";
+        canvas.title = `Click to explore ${area.name}`;
         found = true;
         break;
       }
     }
-    if (!found) canvas.title = "";
+
+    if (!found) {
+      // Check for papers
+      for (let i = paperRects.length - 1; i >= 0; i--) {
+        const r = paperRects[i];
+        if (mx >= r.x && mx <= r.x + r.w && my >= r.y && my <= r.y + r.h) {
+          canvas.style.cursor = "default";
+          const relevanceText = r.data.relevance !== null && r.data.relevance !== undefined
+            ? r.data.relevance + "/10"
+            : "Not scored";
+          canvas.title = `${r.data.name}\nRelevance: ${relevanceText}\nType: ${r.data.type || 'N/A'}`;
+          found = true;
+          break;
+        }
+      }
+    }
+
+    if (!found) {
+      canvas.style.cursor = "default";
+      canvas.title = "";
+    }
   };
 
-  return canvas;
+  container.appendChild(canvas);
+
+  // Keyboard navigation (Escape to go back)
+  const handleKeyPress = (event) => {
+    if (event.key === 'Escape' && currentPath.length > 0) {
+      currentPath.value = currentPath.slice(0, -1);
+    }
+  };
+
+  // Add keyboard listener when canvas is visible
+  window.addEventListener('keydown', handleKeyPress);
+
+  // Cleanup on component removal
+  const cleanup = () => {
+    window.removeEventListener('keydown', handleKeyPress);
+  };
+
+  // Store cleanup for potential future use
+  container._cleanup = cleanup;
+
+  return container;
 }
 ```
 
@@ -405,12 +548,43 @@ ${highValuePapers.length > 0 ? html`
 </div>
 ` : html`<p class="note">No high-relevance papers in current view.</p>`}
 
+## Dataset Information
+
+<div class="dataset-info">
+  <p><strong>Dataset Size:</strong> ${papers.summary.totalPapers} total papers | ${papers.reviews.length} reviews processed</p>
+  <p><strong>Last Updated:</strong> ${new Date(papers.summary.lastUpdated).toLocaleString()}</p>
+  <p><strong>Visualization:</strong> Built with d3.treemap() - optimized for thousands of papers with Canvas rendering</p>
+</div>
+
 <style>
-.breadcrumb-container {
+.dataset-info {
   background: var(--theme-background-alt);
   border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem 0;
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  border-left: 4px solid #2E86AB;
+  font-size: 0.9rem;
+  color: var(--theme-foreground-muted);
+}
+
+.dataset-info p {
+  margin: 0.5rem 0;
+}
+
+.dataset-info strong {
+  color: var(--theme-foreground);
+  font-weight: 600;
+}
+</style>
+
+<style>
+.breadcrumb-container {
+  background: linear-gradient(135deg, var(--theme-background-alt) 0%, var(--theme-background) 100%);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .breadcrumbs {
@@ -418,80 +592,108 @@ ${highValuePapers.length > 0 ? html`
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+  font-size: 0.95rem;
 }
 
 .breadcrumb {
   color: var(--theme-foreground-focus);
   text-decoration: none;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  transition: background 0.2s;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  background: transparent;
 }
 
 .breadcrumb:hover:not(.active) {
-  background: var(--theme-background);
-  text-decoration: underline;
+  background: rgba(46, 134, 171, 0.1);
+  transform: translateY(-1px);
+  text-decoration: none;
+  color: #2E86AB;
 }
 
 .breadcrumb.active {
-  font-weight: bold;
+  font-weight: 600;
   color: var(--theme-foreground);
+  background: rgba(124, 181, 24, 0.15);
+  padding: 0.4rem 0.8rem;
 }
 
 .separator {
   color: var(--theme-foreground-muted);
+  font-weight: 300;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
   margin: 2rem 0;
 }
 
 .stat-card {
-  background: var(--theme-background-alt);
-  border-radius: 8px;
-  padding: 1rem;
+  background: linear-gradient(135deg, var(--theme-background-alt) 0%, var(--theme-background) 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
   text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .stat-card h3 {
   font-size: 0.875rem;
   color: var(--theme-foreground-muted);
-  margin: 0 0 0.5rem 0;
-  font-weight: normal;
+  margin: 0 0 0.75rem 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .stat-value {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: 700;
   color: var(--theme-foreground-focus);
+  background: linear-gradient(135deg, #2E86AB, #7CB518);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .legend-container {
-  background: var(--theme-background-alt);
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem 0;
+  background: linear-gradient(135deg, var(--theme-background-alt) 0%, var(--theme-background) 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .legend-title {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
   color: var(--theme-foreground);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .legend-gradient {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .gradient-bar {
-  height: 30px;
-  border-radius: 4px;
+  height: 40px;
+  border-radius: 8px;
   background: linear-gradient(to right, #F39237, #7CB518, #2E86AB);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .gradient-labels {
@@ -499,14 +701,17 @@ ${highValuePapers.length > 0 ? html`
   justify-content: space-between;
   font-size: 0.875rem;
   color: var(--theme-foreground-muted);
+  font-weight: 500;
 }
 
 .card {
-  background: var(--theme-background-alt);
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem 0;
+  background: linear-gradient(135deg, var(--theme-background-alt) 0%, var(--theme-background) 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
   overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .card table {
@@ -516,15 +721,23 @@ ${highValuePapers.length > 0 ? html`
 
 .card th {
   text-align: left;
-  padding: 0.5rem;
+  padding: 0.75rem 1rem;
   border-bottom: 2px solid var(--theme-background);
   color: var(--theme-foreground-muted);
   font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
 }
 
 .card td {
-  padding: 0.5rem;
-  border-bottom: 1px solid var(--theme-background);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background 0.2s ease;
+}
+
+.card tr:hover td {
+  background: rgba(46, 134, 171, 0.05);
 }
 
 .card tr:last-child td {
@@ -534,22 +747,37 @@ ${highValuePapers.length > 0 ? html`
 .note {
   color: var(--theme-foreground-muted);
   font-style: italic;
-  padding: 1rem;
+  padding: 2rem;
   text-align: center;
+  background: var(--theme-background-alt);
+  border-radius: 8px;
+  margin: 1rem 0;
 }
 
 canvas {
-  border: 1px solid var(--theme-background-alt);
-  border-radius: 8px;
+  border: 2px solid var(--theme-background-alt);
+  border-radius: 12px;
   margin: 1rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+canvas:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .info-banner {
   background: linear-gradient(135deg, #2E86AB 0%, #7CB518 100%);
   color: white;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
   margin: 1rem 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.info-banner strong {
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 </style>

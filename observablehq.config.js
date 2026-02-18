@@ -6,6 +6,7 @@ export default {
     {name: "Papers", path: "/papers"},
     {name: "Metrics", path: "/metrics"},
     {name: "Topics", path: "/topics"},
+    {name: "Style Manual", path: "/style-manual"},
   ],
   theme: "light",
   toc: true,

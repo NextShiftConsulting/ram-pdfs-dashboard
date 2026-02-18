@@ -55,14 +55,20 @@ import {registerFile} from "./_observablehq/stdlib.73a8ec5a.js";
 
 registerFile("./data/papers.json", {"name":"./data/papers.json","mimeType":"application/json","path":"./_file/data/papers.94c57563.json","lastModified":1771378728975,"size":27703});
 
-define({id: "c1e1b375", inputs: ["FileAttachment"], outputs: ["papers","d3"], body: async (FileAttachment) => {
+define({id: "5da61225", inputs: ["FileAttachment"], outputs: ["papers","d3","perfStats"], body: async (FileAttachment) => {
 const d3 = await import("./_npm/d3@7.9.0/e324157d.js");
 const papers = await FileAttachment("./data/papers.json").json();
 
-return {papers,d3};
+// Performance stats for debugging large datasets
+const perfStats = {
+  totalPapers: papers.summary.totalPapers,
+  totalReviews: papers.reviews.length,
+  loadTime: Date.now()
+};
+return {papers,d3,perfStats};
 }});
 
-define({id: "78f5885a", inputs: ["papers"], outputs: ["topicKeywords","classifyPaper","buildHierarchy","hierarchyData"], body: (papers) => {
+define({id: "a1beb510", inputs: ["papers"], outputs: ["topicKeywords","classifyPaper","buildHierarchy","hierarchyData"], body: (papers) => {
 // Build hierarchical topic structure with keyword-based classification
 const topicKeywords = {
   "Core YRSN": {
@@ -136,7 +142,7 @@ function classifyPaper(review) {
   return matches;
 }
 
-// Build hierarchical data structure
+// Build hierarchical data structure (optimized for thousands of papers)
 function buildHierarchy() {
   const root = {
     name: "All Topics",
@@ -144,36 +150,68 @@ function buildHierarchy() {
   };
 
   const topicMap = new Map();
+  const subtopicCache = new Map();
 
-  // Process each review
+  // Process each review with optimized lookups
   papers.reviews.forEach(review => {
     const classifications = classifyPaper(review);
 
     classifications.forEach(({topic, subtopic}) => {
-      // Get or create topic
-      let topicNode = topicMap.get(topic);
-      if (!topicNode) {
-        topicNode = { name: topic, children: [] };
-        topicMap.set(topic, topicNode);
-        root.children.push(topicNode);
-      }
+      const cacheKey = `${topic}::${subtopic}`;
 
-      // Get or create subtopic
-      let subtopicNode = topicNode.children.find(c => c.name === subtopic);
+      // Check cache first
+      let subtopicNode = subtopicCache.get(cacheKey);
+
       if (!subtopicNode) {
-        subtopicNode = { name: subtopic, children: [] };
-        topicNode.children.push(subtopicNode);
+        // Get or create topic
+        let topicNode = topicMap.get(topic);
+        if (!topicNode) {
+          topicNode = { name: topic, children: [] };
+          topicMap.set(topic, topicNode);
+          root.children.push(topicNode);
+        }
+
+        // Get or create subtopic
+        subtopicNode = topicNode.children.find(c => c.name === subtopic);
+        if (!subtopicNode) {
+          subtopicNode = { name: subtopic, children: [] };
+          topicNode.children.push(subtopicNode);
+        }
+
+        subtopicCache.set(cacheKey, subtopicNode);
       }
 
-      // Add paper
+      // Add paper with shortened display name for better rendering
+      const displayName = review.arxivId
+        ? review.arxivId.replace(/^(\d{4})\.(\d+)v.*$/, '$1.$2')
+        : review.filename.substring(0, 15);
+
       subtopicNode.children.push({
-        name: review.arxivId || review.filename,
+        name: displayName,
         value: 1,
-        relevance: review.relevanceScore || 0,
+        relevance: review.relevanceScore,
         type: review.type,
         filename: review.filename,
+        arxivId: review.arxivId,
       });
     });
+  });
+
+  // Sort children by relevance and count for better layout
+  root.children.forEach(topic => {
+    topic.children.forEach(subtopic => {
+      subtopic.children.sort((a, b) => {
+        const relA = a.relevance || 0;
+        const relB = b.relevance || 0;
+        return relB - relA; // Highest relevance first
+      });
+    });
+    topic.children.sort((a, b) => b.children.length - a.children.length);
+  });
+  root.children.sort((a, b) => {
+    const countA = a.children.reduce((sum, c) => sum + c.children.length, 0);
+    const countB = b.children.reduce((sum, c) => sum + c.children.length, 0);
+    return countB - countA;
   });
 
   return root;
@@ -273,6 +311,24 @@ highValuePapers.map(p => html`
 ))
 }});
 
+define({id: "24ad9eee", mode: "inline", inputs: ["papers","display"], body: async (papers,display) => {
+display(await(
+papers.summary.totalPapers
+))
+}});
+
+define({id: "60c4c560", mode: "inline", inputs: ["papers","display"], body: async (papers,display) => {
+display(await(
+papers.reviews.length
+))
+}});
+
+define({id: "eaef85c8", mode: "inline", inputs: ["papers","display"], body: async (papers,display) => {
+display(await(
+new Date(papers.summary.lastUpdated).toLocaleString()
+))
+}});
+
 </script>
 </head>
 <body>
@@ -288,6 +344,7 @@ highValuePapers.map(p => html`
     <li class="observablehq-link"><a href="./papers">Papers</a></li>
     <li class="observablehq-link"><a href="./metrics">Metrics</a></li>
     <li class="observablehq-link observablehq-link-active"><a href="./topics">Topics</a></li>
+    <li class="observablehq-link"><a href="./style-manual">Style Manual</a></li>
   </ol>
 </nav>
 <script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
@@ -299,6 +356,7 @@ highValuePapers.map(p => html`
 <li class="observablehq-secondary-link"><a href="#current-view-statistics">Current View Statistics</a></li>
 <li class="observablehq-secondary-link"><a href="#legend">Legend</a></li>
 <li class="observablehq-secondary-link"><a href="#high-value-papers-in-current-view">High-Value Papers in Current View</a></li>
+<li class="observablehq-secondary-link"><a href="#dataset-information">Dataset Information</a></li>
 </ol>
 </nav>
 </aside>
@@ -306,10 +364,16 @@ highValuePapers.map(p => html`
 <h1 id="topics-zoomable-treemap" tabindex="-1"><a class="observablehq-header-anchor" href="#topics-zoomable-treemap">Topics - Zoomable Treemap</a></h1>
 <p>Research topics monitored by the YRSN Research Monitor.</p>
 <div class="info-banner">
-  <strong>How to use:</strong> Click on any topic category (the labeled areas) to drill down into subtopics and papers. Use the breadcrumb trail above the visualization to navigate back up. Colors represent relevance scores (orange = low, blue = high).
+  <strong>Interactive Treemap Navigation:</strong>
+  <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0;">
+    <li><strong>Click category headers</strong> to drill down into subtopics and papers</li>
+    <li><strong>Use breadcrumbs</strong> above to navigate back up the hierarchy (or press <kbd>ESC</kbd>)</li>
+    <li><strong>Hover over papers</strong> to see relevance scores and details</li>
+    <li><strong>Colors:</strong> Orange (low relevance) → Green (medium) → Blue (high relevance)</li>
+  </ul>
 </div>
-<div class="observablehq observablehq--block"><!--:c1e1b375:--></div>
-<div class="observablehq observablehq--block"><!--:78f5885a:--></div>
+<div class="observablehq observablehq--block"><!--:5da61225:--></div>
+<div class="observablehq observablehq--block"><!--:a1beb510:--></div>
 <div class="observablehq observablehq--block"><!--:63726cef:--></div>
 <div class="observablehq observablehq--block"><!--:761e59a3:--></div>
 <div class="breadcrumb-container">
@@ -318,7 +382,7 @@ highValuePapers.map(p => html`
   </div>
 </div>
 <div class="observablehq observablehq--block">
-  <div class="observablehq--inspect observablehq--error">SyntaxError: 'return' outside of function (159:2)</div>
+  <div class="observablehq--inspect observablehq--error">SyntaxError: 'return' outside of function (257:2)</div>
 </div>
 <h2 id="current-view-statistics" tabindex="-1"><a class="observablehq-header-anchor" href="#current-view-statistics">Current View Statistics</a></h2>
 <div class="stats-grid">
@@ -369,12 +433,40 @@ highValuePapers.map(p => html`
   </table>
 </div>
 ` : html`<p class="note">No high-relevance papers in current view.</p>`}
+<h2 id="dataset-information" tabindex="-1"><a class="observablehq-header-anchor" href="#dataset-information">Dataset Information</a></h2>
+<div class="dataset-info">
+  <p><strong>Dataset Size:</strong> <observablehq-loading></observablehq-loading><!--:24ad9eee:--> total papers | <observablehq-loading></observablehq-loading><!--:60c4c560:--> reviews processed</p>
+  <p><strong>Last Updated:</strong> <observablehq-loading></observablehq-loading><!--:eaef85c8:--></p>
+  <p><strong>Visualization:</strong> Built with d3.treemap() - optimized for thousands of papers with Canvas rendering</p>
+</div>
 <style>
-.breadcrumb-container {
+.dataset-info {
   background: var(--theme-background-alt);
   border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem 0;
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  border-left: 4px solid #2E86AB;
+  font-size: 0.9rem;
+  color: var(--theme-foreground-muted);
+}
+
+.dataset-info p {
+  margin: 0.5rem 0;
+}
+
+.dataset-info strong {
+  color: var(--theme-foreground);
+  font-weight: 600;
+}
+</style>
+<style>
+.breadcrumb-container {
+  background: linear-gradient(135deg, var(--theme-background-alt) 0%, var(--theme-background) 100%);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .breadcrumbs {
@@ -382,80 +474,108 @@ highValuePapers.map(p => html`
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+  font-size: 0.95rem;
 }
 
 .breadcrumb {
   color: var(--theme-foreground-focus);
   text-decoration: none;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  transition: background 0.2s;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  background: transparent;
 }
 
 .breadcrumb:hover:not(.active) {
-  background: var(--theme-background);
-  text-decoration: underline;
+  background: rgba(46, 134, 171, 0.1);
+  transform: translateY(-1px);
+  text-decoration: none;
+  color: #2E86AB;
 }
 
 .breadcrumb.active {
-  font-weight: bold;
+  font-weight: 600;
   color: var(--theme-foreground);
+  background: rgba(124, 181, 24, 0.15);
+  padding: 0.4rem 0.8rem;
 }
 
 .separator {
   color: var(--theme-foreground-muted);
+  font-weight: 300;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
   margin: 2rem 0;
 }
 
 .stat-card {
-  background: var(--theme-background-alt);
-  border-radius: 8px;
-  padding: 1rem;
+  background: linear-gradient(135deg, var(--theme-background-alt) 0%, var(--theme-background) 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
   text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .stat-card h3 {
   font-size: 0.875rem;
   color: var(--theme-foreground-muted);
-  margin: 0 0 0.5rem 0;
-  font-weight: normal;
+  margin: 0 0 0.75rem 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .stat-value {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: 700;
   color: var(--theme-foreground-focus);
+  background: linear-gradient(135deg, #2E86AB, #7CB518);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .legend-container {
-  background: var(--theme-background-alt);
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem 0;
+  background: linear-gradient(135deg, var(--theme-background-alt) 0%, var(--theme-background) 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .legend-title {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
   color: var(--theme-foreground);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .legend-gradient {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .gradient-bar {
-  height: 30px;
-  border-radius: 4px;
+  height: 40px;
+  border-radius: 8px;
   background: linear-gradient(to right, #F39237, #7CB518, #2E86AB);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .gradient-labels {
@@ -463,14 +583,17 @@ highValuePapers.map(p => html`
   justify-content: space-between;
   font-size: 0.875rem;
   color: var(--theme-foreground-muted);
+  font-weight: 500;
 }
 
 .card {
-  background: var(--theme-background-alt);
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem 0;
+  background: linear-gradient(135deg, var(--theme-background-alt) 0%, var(--theme-background) 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
   overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .card table {
@@ -480,15 +603,23 @@ highValuePapers.map(p => html`
 
 .card th {
   text-align: left;
-  padding: 0.5rem;
+  padding: 0.75rem 1rem;
   border-bottom: 2px solid var(--theme-background);
   color: var(--theme-foreground-muted);
   font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
 }
 
 .card td {
-  padding: 0.5rem;
-  border-bottom: 1px solid var(--theme-background);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background 0.2s ease;
+}
+
+.card tr:hover td {
+  background: rgba(46, 134, 171, 0.05);
 }
 
 .card tr:last-child td {
@@ -498,28 +629,43 @@ highValuePapers.map(p => html`
 .note {
   color: var(--theme-foreground-muted);
   font-style: italic;
-  padding: 1rem;
+  padding: 2rem;
   text-align: center;
+  background: var(--theme-background-alt);
+  border-radius: 8px;
+  margin: 1rem 0;
 }
 
 canvas {
-  border: 1px solid var(--theme-background-alt);
-  border-radius: 8px;
+  border: 2px solid var(--theme-background-alt);
+  border-radius: 12px;
   margin: 1rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+canvas:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .info-banner {
   background: linear-gradient(135deg, #2E86AB 0%, #7CB518 100%);
   color: white;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
   margin: 1rem 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.info-banner strong {
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 </style>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="prev" href="./metrics"><span>Metrics</span></a></nav>
+<nav><a rel="prev" href="./metrics"><span>Metrics</span></a><a rel="next" href="./style-manual"><span>Style Manual</span></a></nav>
 <div>Research Paper Monitor Dashboard - YRSN Project</div>
 </footer>
 </div>
