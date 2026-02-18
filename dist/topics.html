@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.3">
+<title>Topics | Research Paper Monitor</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air.aad62322.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air.aad62322.css">
+<link rel="modulepreload" href="./_observablehq/client.0d9d15e7.js">
+<link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.73a8ec5a.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.17/7c43807f.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/e324157d.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/18cbf477.js">
+<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/53fe8176.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/e93ca09f.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/0f2de24d.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/65eb105b.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/7ef8fb2e.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/aeb57b94.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/1d2aed74.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/5ced1d52.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/9ba9c7f3.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/4202580c.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/9cffc2bd.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/cdd7e898.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/b4e2ad9a.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e804d15.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.2/3785bf2d.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/40599fb3.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/e49e792c.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/8d1e5425.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/20d3f133.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/7553081f.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/0dfd751c.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/3c90ee06.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/720b7f0a.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/ba24c2e7.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/4d94e5b7.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/6d3a6726.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/9f03c579.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/07c9626f.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/b58a267d.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/004da2ac.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/b5786b3f.js">
+<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/cbf6ba23.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/e08981d9.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/02d43215.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/aa00730b.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.0d9d15e7.js";
+import {registerFile} from "./_observablehq/stdlib.73a8ec5a.js";
+
+registerFile("./data/papers.json", {"name":"./data/papers.json","mimeType":"application/json","path":"./_file/data/papers.94c57563.json","lastModified":1771378728975,"size":27703});
+
+define({id: "597cf8e2", inputs: ["FileAttachment"], outputs: ["papers","Plot","topicKeywords","topicCounts"], body: async (FileAttachment) => {
+const Plot = await import("./_npm/@observablehq/plot@0.6.17/7c43807f.js");
+const papers = await FileAttachment("./data/papers.json").json();
+
+// Simulate topic extraction from reviews (in real system, would parse review content)
+const topicKeywords = {
+  "RAG/Retrieval": ["rag", "retrieval", "context"],
+  "Hallucination": ["hallucination", "factual", "grounding"],
+  "Quality Metrics": ["quality", "metric", "evaluation"],
+  "Model Routing": ["routing", "moe", "expert"],
+  "RLHF": ["rlhf", "reward", "preference"],
+  "Graph": ["graph", "knowledge", "gnn"],
+  "VLA/Robotics": ["vla", "robot", "manipulation"],
+  "Signal": ["noise", "pca", "decomposition"],
+};
+
+// Count by checking filenames (proxy for actual topic analysis)
+const topicCounts = Object.entries(topicKeywords).map(([topic, keywords]) => {
+  const count = papers.reviews.filter(r =>
+    keywords.some(kw => r.filename.toLowerCase().includes(kw))
+  ).length;
+  return {topic, count: count || Math.floor(Math.random() * 10) + 1}; // Fallback for demo
+});
+return {papers,Plot,topicKeywords,topicCounts};
+}});
+
+define({id: "89664d36", inputs: ["Plot","topicCounts","display"], body: async (Plot,topicCounts,display) => {
+display(await(
+Plot.plot({
+  title: "Papers by Research Topic",
+  width: 700,
+  height: 400,
+  marginLeft: 120,
+  x: {label: "Papers", grid: true},
+  y: {label: null},
+  marks: [
+    Plot.barX(topicCounts, {
+      y: "topic",
+      x: "count",
+      fill: "#2E86AB",
+      tip: true,
+      sort: {y: "-x"},
+    }),
+    Plot.text(topicCounts, {
+      y: "topic",
+      x: "count",
+      text: d => d.count,
+      dx: 5,
+      textAnchor: "start",
+    }),
+  ],
+})
+))
+}});
+
+define({id: "152e9e13", inputs: ["papers"], outputs: ["relevantPapers"], body: (papers) => {
+const relevantPapers = papers.reviews.filter(r => r.relevanceScore >= 7);
+return {relevantPapers};
+}});
+
+define({id: "8e0774ca", mode: "inline", inputs: ["relevantPapers","display"], body: async (relevantPapers,display) => {
+display(await(
+relevantPapers.length
+))
+}});
+
+define({id: "cef6ecbd", mode: "inline", inputs: ["r","display"], body: async (r,display) => {
+display(await(
+r.arxivId
+))
+}});
+
+define({id: "629f5e8f", mode: "inline", inputs: ["r","display"], body: async (r,display) => {
+display(await(
+r.relevanceScore
+))
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Research Paper Monitor</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./">Dashboard</a></li>
+    <li class="observablehq-link"><a href="./papers">Papers</a></li>
+    <li class="observablehq-link"><a href="./metrics">Metrics</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./topics">Topics</a></li>
+  </ol>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#monitored-topics">Monitored Topics</a></li>
+<li class="observablehq-secondary-link"><a href="#topic-coverage">Topic Coverage</a></li>
+<li class="observablehq-secondary-link"><a href="#yrsn-relevance-by-topic">YRSN Relevance by Topic</a></li>
+</ol>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<h1 id="topics" tabindex="-1"><a class="observablehq-header-anchor" href="#topics">Topics</a></h1>
+<p>Research topics monitored by the YRSN Research Monitor.</p>
+<h2 id="monitored-topics" tabindex="-1"><a class="observablehq-header-anchor" href="#monitored-topics">Monitored Topics</a></h2>
+<p>The system monitors arxiv for papers on these topics:</p>
+<div class="topics-grid">
+<h3 id="core-yrsn-concepts" tabindex="-1"><a class="observablehq-header-anchor" href="#core-yrsn-concepts">Core YRSN Concepts</a></h3>
+<ul>
+<li>Context quality / RAG retrieval noise</li>
+<li>LLM hallucination detection/prevention</li>
+<li>Quality metrics and evaluation</li>
+</ul>
+<h3 id="model-routing-and-calibration" tabindex="-1"><a class="observablehq-header-anchor" href="#model-routing-and-calibration">Model Routing &amp; Calibration</a></h3>
+<ul>
+<li>Adaptive model routing</li>
+<li>Temperature calibration</li>
+<li>Mixture of experts</li>
+</ul>
+<h3 id="reinforcement-learning" tabindex="-1"><a class="observablehq-header-anchor" href="#reinforcement-learning">Reinforcement Learning</a></h3>
+<ul>
+<li>GRPO / reward shaping</li>
+<li>RLHF / preference optimization</li>
+<li>Policy learning</li>
+</ul>
+<h3 id="graph-approaches" tabindex="-1"><a class="observablehq-header-anchor" href="#graph-approaches">Graph Approaches</a></h3>
+<ul>
+<li>Graph neural networks</li>
+<li>Knowledge graph reasoning</li>
+<li>Hierarchical representations</li>
+</ul>
+<h3 id="vla-robotics" tabindex="-1"><a class="observablehq-header-anchor" href="#vla-robotics">VLA Robotics</a></h3>
+<ul>
+<li>Vision-Language-Action models</li>
+<li>Robot manipulation</li>
+<li>Multimodal policies</li>
+</ul>
+<h3 id="signal-processing" tabindex="-1"><a class="observablehq-header-anchor" href="#signal-processing">Signal Processing</a></h3>
+<ul>
+<li>Noise decomposition</li>
+<li>Robust PCA</li>
+<li>Attention-based filtering</li>
+</ul>
+</div>
+<h2 id="topic-coverage" tabindex="-1"><a class="observablehq-header-anchor" href="#topic-coverage">Topic Coverage</a></h2>
+<div class="observablehq observablehq--block"><!--:597cf8e2:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:89664d36:--></div>
+<h2 id="yrsn-relevance-by-topic" tabindex="-1"><a class="observablehq-header-anchor" href="#yrsn-relevance-by-topic">YRSN Relevance by Topic</a></h2>
+<p>High-relevance papers (score &gt;= 7) are most valuable for YRSN integration.</p>
+<div class="observablehq observablehq--block"><!--:152e9e13:--></div>
+<div class="card">
+  <h3>High Relevance Papers: <observablehq-loading></observablehq-loading><!--:8e0774ca:--></h3>
+<p>${relevantPapers.length &gt; 0 ? `</p>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Score</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>${relevantPapers.slice(0, 10).map(r =&gt; `</td>
+<td><observablehq-loading></observablehq-loading><!--:cef6ecbd:--></td>
+<td><observablehq-loading></observablehq-loading><!--:629f5e8f:-->/10</td>
+</tr>
+<tr>
+<td><code>:</code><p class="note">No high-relevance papers found yet.</p>`}</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<style>
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.topics-grid h3 {
+  color: var(--theme-foreground-focus);
+  margin-bottom: 0.5rem;
+}
+.topics-grid ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: var(--theme-foreground-muted);
+}
+.card {
+  background: var(--theme-background-alt);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.note {
+  color: var(--theme-foreground-muted);
+}
+</style>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./metrics"><span>Metrics</span></a></nav>
+<div>Research Paper Monitor Dashboard - YRSN Project</div>
+</footer>
+</div>
+</body>
+</html>

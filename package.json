@@ -1,0 +1,29 @@
+{
+  "name": "ram-pdfs-dashboard",
+  "version": "1.0.0",
+  "description": "Research Paper Monitor Dashboard - Observable Framework",
+  "type": "module",
+  "scripts": {
+    "dev": "observable preview",
+    "build": "observable build",
+    "deploy": "observable build && netlify deploy --prod --dir=dist",
+    "clean": "rm -rf dist .observablehq"
+  },
+  "keywords": [
+    "dashboard",
+    "research",
+    "arxiv",
+    "yrsn"
+  ],
+  "author": "NSC",
+  "license": "MIT",
+  "dependencies": {
+    "@observablehq/framework": "^1.13.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-darwin-x64": "^4.57.1"
+  },
+  "devDependencies": {
+    "@rollup/rollup-darwin-x64": "^4.34.8"
+  }
+}

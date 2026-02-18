@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.3">
+<title>Metrics | Research Paper Monitor</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air.aad62322.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air.aad62322.css">
+<link rel="modulepreload" href="./_observablehq/client.0d9d15e7.js">
+<link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.73a8ec5a.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.17/7c43807f.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/e324157d.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/18cbf477.js">
+<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/53fe8176.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/e93ca09f.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/0f2de24d.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/65eb105b.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/7ef8fb2e.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/aeb57b94.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/1d2aed74.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/5ced1d52.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/9ba9c7f3.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/4202580c.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/9cffc2bd.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/cdd7e898.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/b4e2ad9a.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e804d15.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.2/3785bf2d.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/40599fb3.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/e49e792c.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/8d1e5425.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/20d3f133.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/7553081f.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/0dfd751c.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/3c90ee06.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/720b7f0a.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/ba24c2e7.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/4d94e5b7.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/6d3a6726.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/9f03c579.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/07c9626f.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/b58a267d.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/004da2ac.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/b5786b3f.js">
+<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/cbf6ba23.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/e08981d9.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/02d43215.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/aa00730b.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.0d9d15e7.js";
+import {registerFile} from "./_observablehq/stdlib.73a8ec5a.js";
+
+registerFile("./data/papers.json", {"name":"./data/papers.json","mimeType":"application/json","path":"./_file/data/papers.94c57563.json","lastModified":1771378728975,"size":27703});
+
+define({id: "85328548", inputs: ["FileAttachment"], outputs: ["papers"], body: async (FileAttachment) => {
+const papers = await FileAttachment("./data/papers.json").json();
+return {papers};
+}});
+
+define({id: "24ad9eee", mode: "inline", inputs: ["papers","display"], body: async (papers,display) => {
+display(await(
+papers.summary.totalPapers
+))
+}});
+
+define({id: "191399ac", mode: "inline", inputs: ["papers","display"], body: async (papers,display) => {
+display(await(
+papers.summary.totalReviews
+))
+}});
+
+define({id: "375bec87", mode: "inline", inputs: ["papers","display"], body: async (papers,display) => {
+display(await(
+((papers.summary.totalReviews / Math.max(papers.summary.totalPapers, 1)) * 100).toFixed(0)
+))
+}});
+
+define({id: "bec4fe84", inputs: ["papers"], outputs: ["Plot","typeData"], body: async (papers) => {
+const Plot = await import("./_npm/@observablehq/plot@0.6.17/7c43807f.js");
+
+const typeData = [
+  {type: "YRSN Analysis", count: papers.byType.yrsn, pct: papers.byType.yrsn / papers.summary.totalReviews * 100},
+  {type: "Tech Review", count: papers.byType.tech, pct: papers.byType.tech / papers.summary.totalReviews * 100},
+  {type: "Other", count: papers.byType.other, pct: papers.byType.other / papers.summary.totalReviews * 100},
+].filter(d => d.count > 0);
+return {Plot,typeData};
+}});
+
+define({id: "d0324828", inputs: ["Plot","typeData","display"], body: async (Plot,typeData,display) => {
+display(await(
+Plot.plot({
+  title: "Review Type Distribution",
+  width: 500,
+  height: 300,
+  marks: [
+    Plot.barX(typeData, {
+      y: "type",
+      x: "count",
+      fill: "type",
+      tip: d => `${d.type}: ${d.count} (${d.pct.toFixed(1)}%)`,
+    }),
+    Plot.text(typeData, {
+      y: "type",
+      x: "count",
+      text: d => `${d.count}`,
+      dx: 5,
+      textAnchor: "start",
+    }),
+  ],
+  color: {
+    domain: ["YRSN Analysis", "Tech Review", "Other"],
+    range: ["#2E86AB", "#7CB518", "#F39237"],
+  },
+  x: {label: "Count"},
+  y: {label: null},
+})
+))
+}});
+
+define({id: "02a4b32e", inputs: ["papers"], outputs: ["scores","avgScore","highRelevance","medRelevance","lowRelevance"], body: (papers) => {
+const scores = papers.reviews
+  .filter(r => r.relevanceScore !== null)
+  .map(r => r.relevanceScore);
+
+const avgScore = scores.length > 0
+  ? (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1)
+  : "N/A";
+
+const highRelevance = scores.filter(s => s >= 7).length;
+const medRelevance = scores.filter(s => s >= 4 && s < 7).length;
+const lowRelevance = scores.filter(s => s < 4).length;
+return {scores,avgScore,highRelevance,medRelevance,lowRelevance};
+}});
+
+define({id: "63de3906", mode: "inline", inputs: ["avgScore","display"], body: async (avgScore,display) => {
+display(await(
+avgScore
+))
+}});
+
+define({id: "29745568", mode: "inline", inputs: ["highRelevance","display"], body: async (highRelevance,display) => {
+display(await(
+highRelevance
+))
+}});
+
+define({id: "530ca46b", mode: "inline", inputs: ["medRelevance","display"], body: async (medRelevance,display) => {
+display(await(
+medRelevance
+))
+}});
+
+define({id: "8b0900f8", mode: "inline", inputs: ["lowRelevance","display"], body: async (lowRelevance,display) => {
+display(await(
+lowRelevance
+))
+}});
+
+define({id: "eaef85c8", mode: "inline", inputs: ["papers","display"], body: async (papers,display) => {
+display(await(
+new Date(papers.summary.lastUpdated).toLocaleString()
+))
+}});
+
+define({id: "b388640c", mode: "inline", inputs: ["papers","display"], body: async (papers,display) => {
+display(await(
+papers.summary.processedCount
+))
+}});
+
+define({id: "2bc8b4c4", mode: "inline", inputs: ["papers","display"], body: async (papers,display) => {
+display(await(
+((papers.summary.totalReviews / Math.max(papers.summary.totalPapers, 1)) * 100).toFixed(1)
+))
+}});
+
+define({id: "c1c3a3df", mode: "inline", inputs: ["papers","display"], body: async (papers,display) => {
+display(await(
+((papers.byType.yrsn / Math.max(papers.summary.totalReviews, 1)) * 100).toFixed(1)
+))
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Research Paper Monitor</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./">Dashboard</a></li>
+    <li class="observablehq-link"><a href="./papers">Papers</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./metrics">Metrics</a></li>
+    <li class="observablehq-link"><a href="./topics">Topics</a></li>
+  </ol>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#summary-statistics">Summary Statistics</a></li>
+<li class="observablehq-secondary-link"><a href="#review-type-breakdown">Review Type Breakdown</a></li>
+<li class="observablehq-secondary-link"><a href="#relevance-score-statistics">Relevance Score Statistics</a></li>
+<li class="observablehq-secondary-link"><a href="#system-status">System Status</a></li>
+</ol>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<h1 id="metrics" tabindex="-1"><a class="observablehq-header-anchor" href="#metrics">Metrics</a></h1>
+<p>System performance and processing metrics.</p>
+<div class="observablehq observablehq--block"><!--:85328548:--></div>
+<h2 id="summary-statistics" tabindex="-1"><a class="observablehq-header-anchor" href="#summary-statistics">Summary Statistics</a></h2>
+<div class="grid grid-cols-3">
+  <div class="metric-card">
+    <div class="metric-value"><observablehq-loading></observablehq-loading><!--:24ad9eee:--></div>
+    <div class="metric-label">PDFs Downloaded</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value"><observablehq-loading></observablehq-loading><!--:191399ac:--></div>
+    <div class="metric-label">Reviews Generated</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value"><observablehq-loading></observablehq-loading><!--:375bec87:-->%</div>
+    <div class="metric-label">Processing Rate</div>
+  </div>
+</div>
+<h2 id="review-type-breakdown" tabindex="-1"><a class="observablehq-header-anchor" href="#review-type-breakdown">Review Type Breakdown</a></h2>
+<div class="observablehq observablehq--block"><!--:bec4fe84:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:d0324828:--></div>
+<h2 id="relevance-score-statistics" tabindex="-1"><a class="observablehq-header-anchor" href="#relevance-score-statistics">Relevance Score Statistics</a></h2>
+<div class="observablehq observablehq--block"><!--:02a4b32e:--></div>
+<div class="grid grid-cols-4">
+  <div class="metric-card">
+    <div class="metric-value"><observablehq-loading></observablehq-loading><!--:63de3906:--></div>
+    <div class="metric-label">Avg Score</div>
+  </div>
+  <div class="metric-card highlight-high">
+    <div class="metric-value"><observablehq-loading></observablehq-loading><!--:29745568:--></div>
+    <div class="metric-label">High (7-10)</div>
+  </div>
+  <div class="metric-card highlight-med">
+    <div class="metric-value"><observablehq-loading></observablehq-loading><!--:530ca46b:--></div>
+    <div class="metric-label">Medium (4-6)</div>
+  </div>
+  <div class="metric-card highlight-low">
+    <div class="metric-value"><observablehq-loading></observablehq-loading><!--:8b0900f8:--></div>
+    <div class="metric-label">Low (0-3)</div>
+  </div>
+</div>
+<h2 id="system-status" tabindex="-1"><a class="observablehq-header-anchor" href="#system-status">System Status</a></h2>
+<div class="card">
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Last Updated</td>
+<td><observablehq-loading></observablehq-loading><!--:eaef85c8:--></td>
+</tr>
+<tr>
+<td>Processed Papers</td>
+<td><observablehq-loading></observablehq-loading><!--:b388640c:--></td>
+</tr>
+<tr>
+<td>Review Coverage</td>
+<td><observablehq-loading></observablehq-loading><!--:2bc8b4c4:-->%</td>
+</tr>
+<tr>
+<td>YRSN Coverage</td>
+<td><observablehq-loading></observablehq-loading><!--:c1c3a3df:-->%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<style>
+.grid {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.metric-card {
+  background: var(--theme-background-alt);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.metric-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--theme-foreground-focus);
+}
+.metric-label {
+  font-size: 0.875rem;
+  color: var(--theme-foreground-muted);
+  margin-top: 0.5rem;
+}
+.highlight-high .metric-value { color: #2E86AB; }
+.highlight-med .metric-value { color: #7CB518; }
+.highlight-low .metric-value { color: #F39237; }
+.card {
+  background: var(--theme-background-alt);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+</style>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./papers"><span>Papers</span></a><a rel="next" href="./topics"><span>Topics</span></a></nav>
+<div>Research Paper Monitor Dashboard - YRSN Project</div>
+</footer>
+</div>
+</body>
+</html>
