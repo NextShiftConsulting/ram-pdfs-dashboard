@@ -142,7 +142,7 @@ window.closeReview = closeReview;
 
 ```js
 // Custom table with clickable rows
-{
+(() => {
   const table = Inputs.table(filteredReviews, {
     columns: ["title", "arxivId", "type", "relevanceScore", "citations", "publishedDate"],
     header: {
@@ -218,7 +218,7 @@ window.closeReview = closeReview;
   }
 
   return table;
-}
+})()
 ```
 
 ```js

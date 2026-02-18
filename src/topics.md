@@ -220,270 +220,268 @@ const currentData = getCurrentData();
 
 ```js
 // Treemap visualization with Canvas for performance (optimized for 1000s of papers)
-{
-  const width = 1200;
-  const height = 700;
+const width = 1200;
+const height = 700;
 
-  // Create hierarchy and compute layout
-  const root = d3.hierarchy(currentData)
-    .sum(d => d.value || 0)
-    .sort((a, b) => (b.value || 0) - (a.value || 0));
+// Create hierarchy and compute layout
+const root = d3.hierarchy(currentData)
+  .sum(d => d.value || 0)
+  .sort((a, b) => (b.value || 0) - (a.value || 0));
 
-  const treemap = d3.treemap()
-    .size([width, height])
-    .paddingOuter(3)
-    .paddingInner(2)
-    .paddingTop(35)  // Make room for category headers
-    .round(true);
+const treemap = d3.treemap()
+  .size([width, height])
+  .paddingOuter(3)
+  .paddingInner(2)
+  .paddingTop(35)  // Make room for category headers
+  .round(true);
 
-  treemap(root);
+treemap(root);
 
-  // Enhanced color scale with better visual distinction (Orange → Green → Blue)
-  const colorScale = d3.scaleSequential()
-    .domain([0, 10])
-    .interpolator(t => {
-      // 3-color gradient: Orange (0) → Green (5) → Blue (10)
-      if (t < 0.5) {
-        return d3.interpolateRgb("#F39237", "#7CB518")(t * 2);
-      } else {
-        return d3.interpolateRgb("#7CB518", "#2E86AB")((t - 0.5) * 2);
-      }
-    });
+// Enhanced color scale with better visual distinction (Orange → Green → Blue)
+const colorScale = d3.scaleSequential()
+  .domain([0, 10])
+  .interpolator(t => {
+    // 3-color gradient: Orange (0) → Green (5) → Blue (10)
+    if (t < 0.5) {
+      return d3.interpolateRgb("#F39237", "#7CB518")(t * 2);
+    } else {
+      return d3.interpolateRgb("#7CB518", "#2E86AB")((t - 0.5) * 2);
+    }
+  });
 
-  // Create container with canvas
-  const container = document.createElement("div");
-  container.style.position = "relative";
-  container.style.width = `${width}px`;
-  container.style.height = `${height}px`;
+// Create container with canvas
+const container = document.createElement("div");
+container.style.position = "relative";
+container.style.width = `${width}px`;
+container.style.height = `${height}px`;
 
-  const canvas = document.createElement("canvas");
-  canvas.width = width;
-  canvas.height = height;
-  canvas.style.cursor = "pointer";
-  canvas.style.display = "block";
-  const ctx = canvas.getContext("2d");
+const canvas = document.createElement("canvas");
+canvas.width = width;
+canvas.height = height;
+canvas.style.cursor = "pointer";
+canvas.style.display = "block";
+const ctx = canvas.getContext("2d");
 
-  // Store clickable areas for hit detection
-  const clickableAreas = [];
-  const paperRects = [];
+// Store clickable areas for hit detection
+const clickableAreas = [];
+const paperRects = [];
 
-  // Optimized draw function
-  function draw() {
-    ctx.clearRect(0, 0, width, height);
-    clickableAreas.length = 0;
-    paperRects.length = 0;
+// Optimized draw function
+function draw() {
+  ctx.clearRect(0, 0, width, height);
+  clickableAreas.length = 0;
+  paperRects.length = 0;
 
-    // Draw leaf nodes (papers) first
-    root.leaves().forEach(d => {
+  // Draw leaf nodes (papers) first
+  root.leaves().forEach(d => {
+    const x = d.x0;
+    const y = d.y0;
+    const w = d.x1 - d.x0;
+    const h = d.y1 - d.y0;
+
+    // Only draw if visible (minimum 2px)
+    if (w > 2 && h > 2) {
+      // Color based on relevance score with fallback
+      const relevance = d.data.relevance !== null && d.data.relevance !== undefined
+        ? d.data.relevance
+        : 5;
+      ctx.fillStyle = colorScale(relevance);
+      ctx.fillRect(x, y, w, h);
+
+      // Border - thinner for better visibility at scale
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(x, y, w, h);
+
+      // Store for hover detection
+      paperRects.push({
+        x, y, w, h,
+        data: d.data,
+        parent: d.parent?.data
+      });
+    }
+  });
+
+  // Draw group headers with enhanced visibility
+  root.descendants().forEach(d => {
+    if (d.children && d.depth >= 0) {
       const x = d.x0;
       const y = d.y0;
       const w = d.x1 - d.x0;
       const h = d.y1 - d.y0;
+      const headerHeight = 30;
 
-      // Only draw if visible (minimum 2px)
-      if (w > 2 && h > 2) {
-        // Color based on relevance score with fallback
-        const relevance = d.data.relevance !== null && d.data.relevance !== undefined
-          ? d.data.relevance
-          : 5;
-        ctx.fillStyle = colorScale(relevance);
-        ctx.fillRect(x, y, w, h);
+      if (w > 80 && h > headerHeight) {
+        // Gradient header background
+        const gradient = ctx.createLinearGradient(x, y, x, y + headerHeight);
+        gradient.addColorStop(0, "rgba(0, 0, 0, 0.85)");
+        gradient.addColorStop(1, "rgba(0, 0, 0, 0.65)");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(x, y, w, headerHeight);
 
-        // Border - thinner for better visibility at scale
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
-        ctx.lineWidth = 0.5;
-        ctx.strokeRect(x, y, w, h);
+        // Title text
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 13px -apple-system, system-ui, sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
 
-        // Store for hover detection
-        paperRects.push({
-          x, y, w, h,
-          data: d.data,
-          parent: d.parent?.data
-        });
-      }
-    });
+        const maxTitleWidth = w - 45;
+        let title = d.data.name;
 
-    // Draw group headers with enhanced visibility
-    root.descendants().forEach(d => {
-      if (d.children && d.depth >= 0) {
-        const x = d.x0;
-        const y = d.y0;
-        const w = d.x1 - d.x0;
-        const h = d.y1 - d.y0;
-        const headerHeight = 30;
+        // Smart truncation
+        ctx.font = "bold 13px -apple-system, system-ui, sans-serif";
+        let titleWidth = ctx.measureText(title).width;
+        while (titleWidth > maxTitleWidth && title.length > 3) {
+          title = title.substring(0, title.length - 1);
+          titleWidth = ctx.measureText(title + "...").width;
+        }
+        if (titleWidth > maxTitleWidth) {
+          title = title.substring(0, title.length - 3) + "...";
+        }
 
-        if (w > 80 && h > headerHeight) {
-          // Gradient header background
-          const gradient = ctx.createLinearGradient(x, y, x, y + headerHeight);
-          gradient.addColorStop(0, "rgba(0, 0, 0, 0.85)");
-          gradient.addColorStop(1, "rgba(0, 0, 0, 0.65)");
-          ctx.fillStyle = gradient;
-          ctx.fillRect(x, y, w, headerHeight);
+        ctx.fillText(title, x + 8, y + 5);
 
-          // Title text
-          ctx.fillStyle = "#fff";
-          ctx.font = "bold 13px -apple-system, system-ui, sans-serif";
+        // Count badge
+        const count = d.leaves().length;
+        const countText = count.toString();
+        ctx.font = "11px -apple-system, system-ui, sans-serif";
+        const countWidth = ctx.measureText(countText).width;
+
+        // Badge background
+        const badgeX = x + w - countWidth - 20;
+        const badgeY = y + 4;
+        ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+        ctx.beginPath();
+        ctx.roundRect(badgeX, badgeY, countWidth + 12, 20, 10);
+        ctx.fill();
+
+        // Badge text
+        ctx.fillStyle = "#fff";
+        ctx.textAlign = "center";
+        ctx.fillText(countText, badgeX + (countWidth + 12) / 2, badgeY + 5);
+
+        // Click indicator
+        if (w > 150) {
+          ctx.font = "10px -apple-system, system-ui, sans-serif";
+          ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
           ctx.textAlign = "left";
-          ctx.textBaseline = "top";
+          ctx.fillText("Click to drill down →", x + 8, y + 18);
+        }
 
-          const maxTitleWidth = w - 45;
-          let title = d.data.name;
-
-          // Smart truncation
-          ctx.font = "bold 13px -apple-system, system-ui, sans-serif";
-          let titleWidth = ctx.measureText(title).width;
-          while (titleWidth > maxTitleWidth && title.length > 3) {
-            title = title.substring(0, title.length - 1);
-            titleWidth = ctx.measureText(title + "...").width;
-          }
-          if (titleWidth > maxTitleWidth) {
-            title = title.substring(0, title.length - 3) + "...";
-          }
-
-          ctx.fillText(title, x + 8, y + 5);
-
-          // Count badge
-          const count = d.leaves().length;
-          const countText = count.toString();
-          ctx.font = "11px -apple-system, system-ui, sans-serif";
-          const countWidth = ctx.measureText(countText).width;
-
-          // Badge background
-          const badgeX = x + w - countWidth - 20;
-          const badgeY = y + 4;
-          ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
-          ctx.beginPath();
-          ctx.roundRect(badgeX, badgeY, countWidth + 12, 20, 10);
-          ctx.fill();
-
-          // Badge text
-          ctx.fillStyle = "#fff";
-          ctx.textAlign = "center";
-          ctx.fillText(countText, badgeX + (countWidth + 12) / 2, badgeY + 5);
-
-          // Click indicator
-          if (w > 150) {
-            ctx.font = "10px -apple-system, system-ui, sans-serif";
-            ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
-            ctx.textAlign = "left";
-            ctx.fillText("Click to drill down →", x + 8, y + 18);
-          }
-
-          // Store clickable area
-          if (d.data.name !== currentData.name) {
-            clickableAreas.push({
-              x, y, w, h: headerHeight,
-              name: d.data.name,
-              type: 'category'
-            });
-          }
+        // Store clickable area
+        if (d.data.name !== currentData.name) {
+          clickableAreas.push({
+            x, y, w, h: headerHeight,
+            name: d.data.name,
+            type: 'category'
+          });
         }
       }
-    });
+    }
+  });
+}
+
+draw();
+
+// Track mouse movement to prevent accidental clicks while dragging
+let mouseDownPos = null;
+canvas.onmousedown = (event) => {
+  const rect = canvas.getBoundingClientRect();
+  mouseDownPos = {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top
+  };
+};
+
+// Enhanced click handler with drag detection
+canvas.onclick = (event) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = event.clientX - rect.left;
+  const my = event.clientY - rect.top;
+
+  // Prevent click if mouse moved more than 5px (likely a drag)
+  if (mouseDownPos) {
+    const dx = Math.abs(mx - mouseDownPos.x);
+    const dy = Math.abs(my - mouseDownPos.y);
+    if (dx > 5 || dy > 5) {
+      mouseDownPos = null;
+      return;
+    }
+  }
+  mouseDownPos = null;
+
+  // Check clickable category headers first
+  for (const area of clickableAreas) {
+    if (mx >= area.x && mx <= area.x + area.w &&
+        my >= area.y && my <= area.y + area.h) {
+      currentPath.value = [...currentPath.value, area.name];
+      return;
+    }
+  }
+};
+
+// Enhanced tooltip
+let tooltip = null;
+canvas.onmousemove = (event) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = event.clientX - rect.left;
+  const my = event.clientY - rect.top;
+
+  // Check for category headers first
+  let found = false;
+  for (const area of clickableAreas) {
+    if (mx >= area.x && mx <= area.x + area.w &&
+        my >= area.y && my <= area.y + area.h) {
+      canvas.style.cursor = "pointer";
+      canvas.title = `Click to explore ${area.name}`;
+      found = true;
+      break;
+    }
   }
 
-  draw();
-
-  // Track mouse movement to prevent accidental clicks while dragging
-  let mouseDownPos = null;
-  canvas.onmousedown = (event) => {
-    const rect = canvas.getBoundingClientRect();
-    mouseDownPos = {
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top
-    };
-  };
-
-  // Enhanced click handler with drag detection
-  canvas.onclick = (event) => {
-    const rect = canvas.getBoundingClientRect();
-    const mx = event.clientX - rect.left;
-    const my = event.clientY - rect.top;
-
-    // Prevent click if mouse moved more than 5px (likely a drag)
-    if (mouseDownPos) {
-      const dx = Math.abs(mx - mouseDownPos.x);
-      const dy = Math.abs(my - mouseDownPos.y);
-      if (dx > 5 || dy > 5) {
-        mouseDownPos = null;
-        return;
-      }
-    }
-    mouseDownPos = null;
-
-    // Check clickable category headers first
-    for (const area of clickableAreas) {
-      if (mx >= area.x && mx <= area.x + area.w &&
-          my >= area.y && my <= area.y + area.h) {
-        currentPath.value = [...currentPath.value, area.name];
-        return;
-      }
-    }
-  };
-
-  // Enhanced tooltip
-  let tooltip = null;
-  canvas.onmousemove = (event) => {
-    const rect = canvas.getBoundingClientRect();
-    const mx = event.clientX - rect.left;
-    const my = event.clientY - rect.top;
-
-    // Check for category headers first
-    let found = false;
-    for (const area of clickableAreas) {
-      if (mx >= area.x && mx <= area.x + area.w &&
-          my >= area.y && my <= area.y + area.h) {
-        canvas.style.cursor = "pointer";
-        canvas.title = `Click to explore ${area.name}`;
+  if (!found) {
+    // Check for papers
+    for (let i = paperRects.length - 1; i >= 0; i--) {
+      const r = paperRects[i];
+      if (mx >= r.x && mx <= r.x + r.w && my >= r.y && my <= r.y + r.h) {
+        canvas.style.cursor = "default";
+        const relevanceText = r.data.relevance !== null && r.data.relevance !== undefined
+          ? r.data.relevance + "/10"
+          : "Not scored";
+        canvas.title = `${r.data.name}\nRelevance: ${relevanceText}\nType: ${r.data.type || 'N/A'}`;
         found = true;
         break;
       }
     }
+  }
 
-    if (!found) {
-      // Check for papers
-      for (let i = paperRects.length - 1; i >= 0; i--) {
-        const r = paperRects[i];
-        if (mx >= r.x && mx <= r.x + r.w && my >= r.y && my <= r.y + r.h) {
-          canvas.style.cursor = "default";
-          const relevanceText = r.data.relevance !== null && r.data.relevance !== undefined
-            ? r.data.relevance + "/10"
-            : "Not scored";
-          canvas.title = `${r.data.name}\nRelevance: ${relevanceText}\nType: ${r.data.type || 'N/A'}`;
-          found = true;
-          break;
-        }
-      }
-    }
+  if (!found) {
+    canvas.style.cursor = "default";
+    canvas.title = "";
+  }
+};
 
-    if (!found) {
-      canvas.style.cursor = "default";
-      canvas.title = "";
-    }
-  };
+container.appendChild(canvas);
 
-  container.appendChild(canvas);
+// Keyboard navigation (Escape to go back)
+const handleKeyPress = (event) => {
+  if (event.key === 'Escape' && currentPath.value.length > 0) {
+    currentPath.value = currentPath.value.slice(0, -1);
+  }
+};
 
-  // Keyboard navigation (Escape to go back)
-  const handleKeyPress = (event) => {
-    if (event.key === 'Escape' && currentPath.value.length > 0) {
-      currentPath.value = currentPath.value.slice(0, -1);
-    }
-  };
+// Add keyboard listener when canvas is visible
+window.addEventListener('keydown', handleKeyPress);
 
-  // Add keyboard listener when canvas is visible
-  window.addEventListener('keydown', handleKeyPress);
+// Cleanup on component removal
+const cleanup = () => {
+  window.removeEventListener('keydown', handleKeyPress);
+};
 
-  // Cleanup on component removal
-  const cleanup = () => {
-    window.removeEventListener('keydown', handleKeyPress);
-  };
+// Store cleanup for potential future use
+container._cleanup = cleanup;
 
-  // Store cleanup for potential future use
-  container._cleanup = cleanup;
-
-  return container;
-}
+display(container);
 ```
 
 ## Current View Statistics
