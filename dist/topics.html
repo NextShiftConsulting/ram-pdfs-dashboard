@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="generator" content="Observable Framework v1.13.3">
-<title>Topics | Research Paper Monitor</title>
+<title>Topics - Zoomable Treemap | Research Paper Monitor</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="preload" as="style" href="./_observablehq/theme-air.aad62322.css">
@@ -13,10 +13,8 @@
 <link rel="modulepreload" href="./_observablehq/client.0d9d15e7.js">
 <link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.73a8ec5a.js">
-<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.17/7c43807f.js">
 <link rel="modulepreload" href="./_npm/d3@7.9.0/e324157d.js">
-<link rel="modulepreload" href="./_npm/isoformat@0.2.1/18cbf477.js">
-<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/53fe8176.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/72f4716c.js">
 <link rel="modulepreload" href="./_npm/d3-array@3.2.4/e93ca09f.js">
 <link rel="modulepreload" href="./_npm/d3-axis@3.0.0/0f2de24d.js">
 <link rel="modulepreload" href="./_npm/d3-brush@3.0.0/65eb105b.js">
@@ -47,7 +45,6 @@
 <link rel="modulepreload" href="./_npm/d3-timer@3.0.1/b58a267d.js">
 <link rel="modulepreload" href="./_npm/d3-transition@3.0.1/004da2ac.js">
 <link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/b5786b3f.js">
-<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/cbf6ba23.js">
 <link rel="modulepreload" href="./_npm/internmap@2.0.3/e08981d9.js">
 <link rel="modulepreload" href="./_npm/delaunator@5.0.1/02d43215.js">
 <link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/aa00730b.js">
@@ -58,81 +55,221 @@ import {registerFile} from "./_observablehq/stdlib.73a8ec5a.js";
 
 registerFile("./data/papers.json", {"name":"./data/papers.json","mimeType":"application/json","path":"./_file/data/papers.94c57563.json","lastModified":1771378728975,"size":27703});
 
-define({id: "597cf8e2", inputs: ["FileAttachment"], outputs: ["papers","Plot","topicKeywords","topicCounts"], body: async (FileAttachment) => {
-const Plot = await import("./_npm/@observablehq/plot@0.6.17/7c43807f.js");
+define({id: "c1e1b375", inputs: ["FileAttachment"], outputs: ["papers","d3"], body: async (FileAttachment) => {
+const d3 = await import("./_npm/d3@7.9.0/e324157d.js");
 const papers = await FileAttachment("./data/papers.json").json();
 
-// Simulate topic extraction from reviews (in real system, would parse review content)
+return {papers,d3};
+}});
+
+define({id: "78f5885a", inputs: ["papers"], outputs: ["topicKeywords","classifyPaper","buildHierarchy","hierarchyData"], body: (papers) => {
+// Build hierarchical topic structure with keyword-based classification
 const topicKeywords = {
-  "RAG/Retrieval": ["rag", "retrieval", "context"],
-  "Hallucination": ["hallucination", "factual", "grounding"],
-  "Quality Metrics": ["quality", "metric", "evaluation"],
-  "Model Routing": ["routing", "moe", "expert"],
-  "RLHF": ["rlhf", "reward", "preference"],
-  "Graph": ["graph", "knowledge", "gnn"],
-  "VLA/Robotics": ["vla", "robot", "manipulation"],
-  "Signal": ["noise", "pca", "decomposition"],
+  "Core YRSN": {
+    keywords: [],
+    children: {
+      "RAG/Retrieval": ["rag", "retrieval", "context", "augment"],
+      "Hallucination Detection": ["hallucination", "factual", "grounding", "truthful"],
+      "Quality Metrics": ["quality", "metric", "evaluation", "benchmark"],
+    }
+  },
+  "Model Routing": {
+    keywords: [],
+    children: {
+      "Adaptive Routing": ["routing", "adaptive", "dynamic"],
+      "Mixture of Experts": ["moe", "expert", "mixture"],
+      "Temperature Calibration": ["temperature", "calibration", "confidence"],
+    }
+  },
+  "Reinforcement Learning": {
+    keywords: [],
+    children: {
+      "GRPO": ["grpo", "reward", "shaping"],
+      "RLHF": ["rlhf", "preference", "optimization", "human"],
+      "Policy Learning": ["policy", "learning", "agent"],
+    }
+  },
+  "Graph Methods": {
+    keywords: [],
+    children: {
+      "Graph Neural Networks": ["gnn", "graph neural"],
+      "Knowledge Graphs": ["knowledge graph", "reasoning"],
+      "Hierarchical": ["hierarchical", "hierarchy", "tree"],
+    }
+  },
+  "VLA Robotics": {
+    keywords: [],
+    children: {
+      "Vision-Language-Action": ["vla", "vision language action"],
+      "Robot Manipulation": ["robot", "manipulation", "grasp"],
+      "Multimodal Policies": ["multimodal", "policy", "action"],
+    }
+  },
+  "Signal Processing": {
+    keywords: [],
+    children: {
+      "Noise Decomposition": ["noise", "decomposition"],
+      "Robust PCA": ["pca", "robust", "principal"],
+      "Attention Filtering": ["attention", "filter"],
+    }
+  },
 };
 
-// Count by checking filenames (proxy for actual topic analysis)
-const topicCounts = Object.entries(topicKeywords).map(([topic, keywords]) => {
-  const count = papers.reviews.filter(r =>
-    keywords.some(kw => r.filename.toLowerCase().includes(kw))
-  ).length;
-  return {topic, count: count || Math.floor(Math.random() * 10) + 1}; // Fallback for demo
-});
-return {papers,Plot,topicKeywords,topicCounts};
+// Classify each paper into topics
+function classifyPaper(review) {
+  const text = (review.filename + " " + (review.arxivId || "")).toLowerCase();
+  const matches = [];
+
+  for (const [topicName, topicData] of Object.entries(topicKeywords)) {
+    for (const [subtopicName, keywords] of Object.entries(topicData.children)) {
+      if (keywords.some(kw => text.includes(kw))) {
+        matches.push({ topic: topicName, subtopic: subtopicName });
+      }
+    }
+  }
+
+  // If no match, assign to "Other"
+  if (matches.length === 0) {
+    matches.push({ topic: "Other", subtopic: "Uncategorized" });
+  }
+
+  return matches;
+}
+
+// Build hierarchical data structure
+function buildHierarchy() {
+  const root = {
+    name: "All Topics",
+    children: []
+  };
+
+  const topicMap = new Map();
+
+  // Process each review
+  papers.reviews.forEach(review => {
+    const classifications = classifyPaper(review);
+
+    classifications.forEach(({topic, subtopic}) => {
+      // Get or create topic
+      let topicNode = topicMap.get(topic);
+      if (!topicNode) {
+        topicNode = { name: topic, children: [] };
+        topicMap.set(topic, topicNode);
+        root.children.push(topicNode);
+      }
+
+      // Get or create subtopic
+      let subtopicNode = topicNode.children.find(c => c.name === subtopic);
+      if (!subtopicNode) {
+        subtopicNode = { name: subtopic, children: [] };
+        topicNode.children.push(subtopicNode);
+      }
+
+      // Add paper
+      subtopicNode.children.push({
+        name: review.arxivId || review.filename,
+        value: 1,
+        relevance: review.relevanceScore || 0,
+        type: review.type,
+        filename: review.filename,
+      });
+    });
+  });
+
+  return root;
+}
+
+const hierarchyData = buildHierarchy();
+return {topicKeywords,classifyPaper,buildHierarchy,hierarchyData};
 }});
 
-define({id: "89664d36", inputs: ["Plot","topicCounts","display"], body: async (Plot,topicCounts,display) => {
+define({id: "63726cef", inputs: ["Mutable"], outputs: ["currentPath"], body: (Mutable) => {
+// Mutable state for zoom navigation
+const currentPath = Mutable([]);
+return {currentPath};
+}});
+
+define({id: "761e59a3", inputs: ["hierarchyData","currentPath"], outputs: ["getCurrentData","currentData"], body: (hierarchyData,currentPath) => {
+// Compute current view based on zoom path
+function getCurrentData() {
+  let node = hierarchyData;
+  for (const step of currentPath) {
+    node = node.children.find(c => c.name === step);
+    if (!node) return hierarchyData;
+  }
+  return node;
+}
+
+const currentData = getCurrentData();
+return {getCurrentData,currentData};
+}});
+
+define({id: "53bf7a83", mode: "inline", inputs: ["currentPath","html","display"], body: async (currentPath,html,display) => {
 display(await(
-Plot.plot({
-  title: "Papers by Research Topic",
-  width: 700,
-  height: 400,
-  marginLeft: 120,
-  x: {label: "Papers", grid: true},
-  y: {label: null},
-  marks: [
-    Plot.barX(topicCounts, {
-      y: "topic",
-      x: "count",
-      fill: "#2E86AB",
-      tip: true,
-      sort: {y: "-x"},
-    }),
-    Plot.text(topicCounts, {
-      y: "topic",
-      x: "count",
-      text: d => d.count,
-      dx: 5,
-      textAnchor: "start",
-    }),
-  ],
-})
+currentPath.length === 0
+      ? html`<span class="breadcrumb active">All Topics</span>`
+      : html`
+        <a href="#" class="breadcrumb" onclick=${() => currentPath.value = []}>All Topics</a>
+        ${currentPath.map((step, i) => html`
+          <span class="separator">›</span>
+          ${i === currentPath.length - 1
+            ? html`<span class="breadcrumb active">${step}</span>`
+            : html`<a href="#" class="breadcrumb" onclick=${() => currentPath.value = currentPath.slice(0, i + 1)}>${step}</a>`
+          }
+        `)}
+      `
 ))
 }});
 
-define({id: "152e9e13", inputs: ["papers"], outputs: ["relevantPapers"], body: (papers) => {
-const relevantPapers = papers.reviews.filter(r => r.relevanceScore >= 7);
-return {relevantPapers};
-}});
-
-define({id: "8e0774ca", mode: "inline", inputs: ["relevantPapers","display"], body: async (relevantPapers,display) => {
+define({id: "cebbfb2a", mode: "inline", inputs: ["d3","currentData","display"], body: async (d3,currentData,display) => {
 display(await(
-relevantPapers.length
+d3.hierarchy(currentData).leaves().length
 ))
 }});
 
-define({id: "cef6ecbd", mode: "inline", inputs: ["r","display"], body: async (r,display) => {
+define({id: "4769584f", mode: "inline", inputs: ["d3","currentData","display"], body: async (d3,currentData,display) => {
 display(await(
-r.arxivId
+(() => {
+      const leaves = d3.hierarchy(currentData).leaves();
+      const scored = leaves.filter(d => d.data.relevance > 0);
+      if (scored.length === 0) return "N/A";
+      const avg = d3.mean(scored, d => d.data.relevance);
+      return avg.toFixed(1);
+    })()
 ))
 }});
 
-define({id: "629f5e8f", mode: "inline", inputs: ["r","display"], body: async (r,display) => {
+define({id: "7632ebab", mode: "inline", inputs: ["d3","currentData","display"], body: async (d3,currentData,display) => {
 display(await(
-r.relevanceScore
+d3.hierarchy(currentData).leaves().filter(d => d.data.relevance >= 7).length
+))
+}});
+
+define({id: "62658358", mode: "inline", inputs: ["currentData","display"], body: async (currentData,display) => {
+display(await(
+currentData.children ? currentData.children.length : 0
+))
+}});
+
+define({id: "ac5b1110", inputs: ["d3","currentData"], outputs: ["highValuePapers"], body: (d3,currentData) => {
+const highValuePapers = d3.hierarchy(currentData)
+  .leaves()
+  .filter(d => d.data.relevance >= 7)
+  .sort((a, b) => b.data.relevance - a.data.relevance)
+  .slice(0, 10)
+  .map(d => d.data);
+return {highValuePapers};
+}});
+
+define({id: "04ff446c", mode: "inline", inputs: ["highValuePapers","html","display"], body: async (highValuePapers,html,display) => {
+display(await(
+highValuePapers.map(p => html`
+        <tr>
+          <td>${p.name}</td>
+          <td>${p.relevance}/10</td>
+          <td>${p.type === 'yrsn' ? '🎯 YRSN' : p.type === 'tech' ? '📋 Tech' : '📄 Other'}</td>
+        </tr>
+      `)
 ))
 }});
 
@@ -159,110 +296,225 @@ r.relevanceScore
 <nav>
 <div>Contents</div>
 <ol>
-<li class="observablehq-secondary-link"><a href="#monitored-topics">Monitored Topics</a></li>
-<li class="observablehq-secondary-link"><a href="#topic-coverage">Topic Coverage</a></li>
-<li class="observablehq-secondary-link"><a href="#yrsn-relevance-by-topic">YRSN Relevance by Topic</a></li>
+<li class="observablehq-secondary-link"><a href="#current-view-statistics">Current View Statistics</a></li>
+<li class="observablehq-secondary-link"><a href="#legend">Legend</a></li>
+<li class="observablehq-secondary-link"><a href="#high-value-papers-in-current-view">High-Value Papers in Current View</a></li>
 </ol>
 </nav>
 </aside>
 <main id="observablehq-main" class="observablehq">
-<h1 id="topics" tabindex="-1"><a class="observablehq-header-anchor" href="#topics">Topics</a></h1>
+<h1 id="topics-zoomable-treemap" tabindex="-1"><a class="observablehq-header-anchor" href="#topics-zoomable-treemap">Topics - Zoomable Treemap</a></h1>
 <p>Research topics monitored by the YRSN Research Monitor.</p>
-<h2 id="monitored-topics" tabindex="-1"><a class="observablehq-header-anchor" href="#monitored-topics">Monitored Topics</a></h2>
-<p>The system monitors arxiv for papers on these topics:</p>
-<div class="topics-grid">
-<h3 id="core-yrsn-concepts" tabindex="-1"><a class="observablehq-header-anchor" href="#core-yrsn-concepts">Core YRSN Concepts</a></h3>
-<ul>
-<li>Context quality / RAG retrieval noise</li>
-<li>LLM hallucination detection/prevention</li>
-<li>Quality metrics and evaluation</li>
-</ul>
-<h3 id="model-routing-and-calibration" tabindex="-1"><a class="observablehq-header-anchor" href="#model-routing-and-calibration">Model Routing &amp; Calibration</a></h3>
-<ul>
-<li>Adaptive model routing</li>
-<li>Temperature calibration</li>
-<li>Mixture of experts</li>
-</ul>
-<h3 id="reinforcement-learning" tabindex="-1"><a class="observablehq-header-anchor" href="#reinforcement-learning">Reinforcement Learning</a></h3>
-<ul>
-<li>GRPO / reward shaping</li>
-<li>RLHF / preference optimization</li>
-<li>Policy learning</li>
-</ul>
-<h3 id="graph-approaches" tabindex="-1"><a class="observablehq-header-anchor" href="#graph-approaches">Graph Approaches</a></h3>
-<ul>
-<li>Graph neural networks</li>
-<li>Knowledge graph reasoning</li>
-<li>Hierarchical representations</li>
-</ul>
-<h3 id="vla-robotics" tabindex="-1"><a class="observablehq-header-anchor" href="#vla-robotics">VLA Robotics</a></h3>
-<ul>
-<li>Vision-Language-Action models</li>
-<li>Robot manipulation</li>
-<li>Multimodal policies</li>
-</ul>
-<h3 id="signal-processing" tabindex="-1"><a class="observablehq-header-anchor" href="#signal-processing">Signal Processing</a></h3>
-<ul>
-<li>Noise decomposition</li>
-<li>Robust PCA</li>
-<li>Attention-based filtering</li>
-</ul>
+<div class="info-banner">
+  <strong>How to use:</strong> Click on any topic category (the labeled areas) to drill down into subtopics and papers. Use the breadcrumb trail above the visualization to navigate back up. Colors represent relevance scores (orange = low, blue = high).
 </div>
-<h2 id="topic-coverage" tabindex="-1"><a class="observablehq-header-anchor" href="#topic-coverage">Topic Coverage</a></h2>
-<div class="observablehq observablehq--block"><!--:597cf8e2:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:89664d36:--></div>
-<h2 id="yrsn-relevance-by-topic" tabindex="-1"><a class="observablehq-header-anchor" href="#yrsn-relevance-by-topic">YRSN Relevance by Topic</a></h2>
-<p>High-relevance papers (score &gt;= 7) are most valuable for YRSN integration.</p>
-<div class="observablehq observablehq--block"><!--:152e9e13:--></div>
+<div class="observablehq observablehq--block"><!--:c1e1b375:--></div>
+<div class="observablehq observablehq--block"><!--:78f5885a:--></div>
+<div class="observablehq observablehq--block"><!--:63726cef:--></div>
+<div class="observablehq observablehq--block"><!--:761e59a3:--></div>
+<div class="breadcrumb-container">
+  <div class="breadcrumbs">
+    <observablehq-loading></observablehq-loading><!--:53bf7a83:-->
+  </div>
+</div>
+<div class="observablehq observablehq--block">
+  <div class="observablehq--inspect observablehq--error">SyntaxError: 'return' outside of function (159:2)</div>
+</div>
+<h2 id="current-view-statistics" tabindex="-1"><a class="observablehq-header-anchor" href="#current-view-statistics">Current View Statistics</a></h2>
+<div class="stats-grid">
+  <div class="stat-card">
+    <h3>Total Papers</h3>
+    <div class="stat-value"><observablehq-loading></observablehq-loading><!--:cebbfb2a:--></div>
+  </div>
+  <div class="stat-card">
+    <h3>Average Relevance</h3>
+    <div class="stat-value"><observablehq-loading></observablehq-loading><!--:4769584f:--></div>
+  </div>
+  <div class="stat-card">
+    <h3>High Relevance (≥7)</h3>
+    <div class="stat-value"><observablehq-loading></observablehq-loading><!--:7632ebab:--></div>
+  </div>
+  <div class="stat-card">
+    <h3>Categories</h3>
+    <div class="stat-value"><observablehq-loading></observablehq-loading><!--:62658358:--></div>
+  </div>
+</div>
+<h2 id="legend" tabindex="-1"><a class="observablehq-header-anchor" href="#legend">Legend</a></h2>
+<div class="legend-container">
+  <div class="legend-title">Relevance Score:</div>
+  <div class="legend-gradient">
+    <div class="gradient-bar"></div>
+    <div class="gradient-labels">
+      <span>0 (Low)</span>
+      <span>5 (Medium)</span>
+      <span>10 (High)</span>
+    </div>
+  </div>
+</div>
+<h2 id="high-value-papers-in-current-view" tabindex="-1"><a class="observablehq-header-anchor" href="#high-value-papers-in-current-view">High-Value Papers in Current View</a></h2>
+<div class="observablehq observablehq--block"><!--:ac5b1110:--></div>
+<p>${highValuePapers.length &gt; 0 ? html`</p>
 <div class="card">
-  <h3>High Relevance Papers: <observablehq-loading></observablehq-loading><!--:8e0774ca:--></h3>
-<p>${relevantPapers.length &gt; 0 ? `</p>
-<table>
-<thead>
-<tr>
-<th>Paper</th>
-<th>Score</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>${relevantPapers.slice(0, 10).map(r =&gt; `</td>
-<td><observablehq-loading></observablehq-loading><!--:cef6ecbd:--></td>
-<td><observablehq-loading></observablehq-loading><!--:629f5e8f:-->/10</td>
-</tr>
-<tr>
-<td><code>:</code><p class="note">No high-relevance papers found yet.</p>`}</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+  <table>
+    <thead>
+      <tr>
+        <th>Paper</th>
+        <th>Score</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--:04ff446c:-->
+    </tbody>
+  </table>
 </div>
+` : html`<p class="note">No high-relevance papers in current view.</p>`}
 <style>
-.topics-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin: 1rem 0;
-}
-.topics-grid h3 {
-  color: var(--theme-foreground-focus);
-  margin-bottom: 0.5rem;
-}
-.topics-grid ul {
-  margin: 0;
-  padding-left: 1.5rem;
-  color: var(--theme-foreground-muted);
-}
-.card {
+.breadcrumb-container {
   background: var(--theme-background-alt);
   border-radius: 8px;
   padding: 1rem;
   margin: 1rem 0;
 }
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.breadcrumb {
+  color: var(--theme-foreground-focus);
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.breadcrumb:hover:not(.active) {
+  background: var(--theme-background);
+  text-decoration: underline;
+}
+
+.breadcrumb.active {
+  font-weight: bold;
+  color: var(--theme-foreground);
+}
+
+.separator {
+  color: var(--theme-foreground-muted);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  background: var(--theme-background-alt);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.stat-card h3 {
+  font-size: 0.875rem;
+  color: var(--theme-foreground-muted);
+  margin: 0 0 0.5rem 0;
+  font-weight: normal;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--theme-foreground-focus);
+}
+
+.legend-container {
+  background: var(--theme-background-alt);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.legend-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--theme-foreground);
+}
+
+.legend-gradient {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gradient-bar {
+  height: 30px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #F39237, #7CB518, #2E86AB);
+}
+
+.gradient-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--theme-foreground-muted);
+}
+
+.card {
+  background: var(--theme-background-alt);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.card th {
+  text-align: left;
+  padding: 0.5rem;
+  border-bottom: 2px solid var(--theme-background);
+  color: var(--theme-foreground-muted);
+  font-weight: 600;
+}
+
+.card td {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--theme-background);
+}
+
+.card tr:last-child td {
+  border-bottom: none;
+}
+
 .note {
   color: var(--theme-foreground-muted);
+  font-style: italic;
+  padding: 1rem;
+  text-align: center;
+}
+
+canvas {
+  border: 1px solid var(--theme-background-alt);
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.info-banner {
+  background: linear-gradient(135deg, #2E86AB 0%, #7CB518 100%);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 </style>
 </main>

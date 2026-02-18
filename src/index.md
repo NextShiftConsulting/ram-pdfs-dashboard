@@ -93,9 +93,28 @@ const recentReviews = papers.reviews.slice(0, 10);
 
 <div class="card">
 
-| Paper ID | Type | Relevance |
-|----------|------|-----------|
-${recentReviews.map(r => `| ${r.arxivId} | ${r.type} | ${r.relevanceScore ?? "N/A"} |`).join("\n")}
+```js
+display(html`
+  <table>
+    <thead>
+      <tr>
+        <th>Paper ID</th>
+        <th>Type</th>
+        <th>Relevance</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${recentReviews.map(r => html`
+        <tr>
+          <td>${r.arxivId}</td>
+          <td>${r.type}</td>
+          <td>${r.relevanceScore ?? "N/A"}</td>
+        </tr>
+      `)}
+    </tbody>
+  </table>
+`);
+```
 
 </div>
 

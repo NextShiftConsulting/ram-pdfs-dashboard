@@ -157,16 +157,27 @@ const recentReviews = papers.reviews.slice(0, 10);
 return {recentReviews};
 }});
 
-define({id: "cef6ecbd", mode: "inline", inputs: ["r","display"], body: async (r,display) => {
-display(await(
-r.arxivId
-))
-}});
-
-define({id: "b1189c46", mode: "inline", inputs: ["r","display"], body: async (r,display) => {
-display(await(
-r.type
-))
+define({id: "d0202d86", inputs: ["display","html","recentReviews"], body: (display,html,recentReviews) => {
+display(html`
+  <table>
+    <thead>
+      <tr>
+        <th>Paper ID</th>
+        <th>Type</th>
+        <th>Relevance</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${recentReviews.map(r => html`
+        <tr>
+          <td>${r.arxivId}</td>
+          <td>${r.type}</td>
+          <td>${r.relevanceScore ?? "N/A"}</td>
+        </tr>
+      `)}
+    </tbody>
+  </table>
+`);
 }});
 
 define({id: "eaef85c8", mode: "inline", inputs: ["papers","display"], body: async (papers,display) => {
@@ -234,22 +245,7 @@ new Date(papers.summary.lastUpdated).toLocaleString()
 <h2 id="recent-reviews" tabindex="-1"><a class="observablehq-header-anchor" href="#recent-reviews">Recent Reviews</a></h2>
 <div class="observablehq observablehq--block"><!--:b51e2610:--></div>
 <div class="card">
-<table>
-<thead>
-<tr>
-<th>Paper ID</th>
-<th>Type</th>
-<th>Relevance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>${recentReviews.map(r =&gt; `</td>
-<td><observablehq-loading></observablehq-loading><!--:cef6ecbd:--></td>
-<td><observablehq-loading></observablehq-loading><!--:b1189c46:--></td>
-</tr>
-</tbody>
-</table>
+<div class="observablehq observablehq--block"><!--:d0202d86:--></div>
 </div>
 <hr>
 <p class="note">Last updated: <observablehq-loading></observablehq-loading><!--:eaef85c8:--></p>
