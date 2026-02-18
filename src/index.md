@@ -99,6 +99,7 @@ display(html`
     <thead>
       <tr>
         <th>Paper ID</th>
+        <th>Title</th>
         <th>Type</th>
         <th>Relevance</th>
       </tr>
@@ -106,9 +107,10 @@ display(html`
     <tbody>
       ${recentReviews.map(r => html`
         <tr>
-          <td>${r.arxivId}</td>
-          <td>${r.type}</td>
-          <td>${r.relevanceScore ?? "N/A"}</td>
+          <td><a href="${r.arxivUrl}" target="_blank">${r.arxivIdClean}</a></td>
+          <td style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${r.title}</td>
+          <td><span style="text-transform: uppercase; font-weight: 500; color: ${r.type === 'yrsn' ? '#2E86AB' : '#7CB518'}">${r.type}</span></td>
+          <td>${r.relevanceScore !== null ? r.relevanceScore + '/10' : "N/A"}</td>
         </tr>
       `)}
     </tbody>
@@ -150,5 +152,28 @@ display(html`
 .note {
   color: var(--theme-foreground-muted);
   font-size: 0.875rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+table th {
+  text-align: left;
+  padding: 0.5rem;
+  border-bottom: 2px solid var(--theme-foreground-muted);
+  font-weight: 600;
+}
+table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--theme-foreground-faint);
+}
+table tr:hover {
+  background: var(--theme-background-alt);
+}
+@media (max-width: 768px) {
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>

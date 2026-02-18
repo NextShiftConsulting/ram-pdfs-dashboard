@@ -205,7 +205,7 @@ const currentData = getCurrentData();
           <span class="separator">›</span>
           ${i === currentPath.length - 1
             ? html`<span class="breadcrumb active">${step}</span>`
-            : html`<a href="#" class="breadcrumb" onclick=${() => currentPath.value = currentPath.slice(0, i + 1)}>${step}</a>`
+            : html`<a href="#" class="breadcrumb" onclick=${() => currentPath.value = currentPath.value.slice(0, i + 1)}>${step}</a>`
           }
         `)}
       `}
@@ -232,10 +232,17 @@ const currentData = getCurrentData();
 
   treemap(root);
 
-  // Enhanced color scale with better visual distinction
+  // Enhanced color scale with better visual distinction (Orange → Green → Blue)
   const colorScale = d3.scaleSequential()
     .domain([0, 10])
-    .interpolator(d3.interpolateRgb("#F39237", "#2E86AB"));
+    .interpolator(t => {
+      // 3-color gradient: Orange (0) → Green (5) → Blue (10)
+      if (t < 0.5) {
+        return d3.interpolateRgb("#F39237", "#7CB518")(t * 2);
+      } else {
+        return d3.interpolateRgb("#7CB518", "#2E86AB")((t - 0.5) * 2);
+      }
+    });
 
   // Create container with canvas
   const container = document.createElement("div");
@@ -402,7 +409,7 @@ const currentData = getCurrentData();
     for (const area of clickableAreas) {
       if (mx >= area.x && mx <= area.x + area.w &&
           my >= area.y && my <= area.y + area.h) {
-        currentPath.value = [...currentPath, area.name];
+        currentPath.value = [...currentPath.value, area.name];
         return;
       }
     }
@@ -453,8 +460,8 @@ const currentData = getCurrentData();
 
   // Keyboard navigation (Escape to go back)
   const handleKeyPress = (event) => {
-    if (event.key === 'Escape' && currentPath.length > 0) {
-      currentPath.value = currentPath.slice(0, -1);
+    if (event.key === 'Escape' && currentPath.value.length > 0) {
+      currentPath.value = currentPath.value.slice(0, -1);
     }
   };
 

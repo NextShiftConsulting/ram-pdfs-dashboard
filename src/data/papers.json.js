@@ -29,29 +29,36 @@ if (fs.existsSync(reviewsDir)) {
     const isYrsn = f.includes("vs_yrsn");
     const isTech = f.includes("techreview");
 
-    // Extract relevance score if present
+    // Extract relevance score if present (handles /10 and /18 scales)
     let relevanceScore = null;
-    const scoreMatch = content.match(/relevance.*?(\d+)\/10/i) || content.match(/score.*?(\d+)/i);
+    const scoreMatch = content.match(/relevance.*?score.*?(\d+)\/(\d+)/i);
     if (scoreMatch) {
-      relevanceScore = parseInt(scoreMatch[1]);
+      const numerator = parseInt(scoreMatch[1]);
+      const denominator = parseInt(scoreMatch[2]);
+      // Normalize to 0-10 scale (10/10 stays 10, 18/18 becomes 10)
+      relevanceScore = denominator === 10 ? numerator : Math.round((numerator / denominator) * 10);
     }
 
-    // Extract metadata
-    const arxivId = f.split("_")[0] + "_" + f.split("_")[1];
+    // Extract metadata - split filename once and cache it
+    const parts = f.split("_");
+    const arxivId = parts.length >= 2 ? `${parts[0]}_${parts[1]}` : parts[0];
     const arxivIdClean = arxivId.replace(/_/g, '.');
+    // Remove version suffix (e.g., "v1") for cleaner URLs
+    const arxivIdForUrl = arxivIdClean.replace(/v\d+$/, '');
 
-    // Extract title, authors, date from content
-    const titleMatch = content.match(/# (?:Technical Review|YRSN Comparison): (.+)/);
-    const title = titleMatch ? titleMatch[1] : `Paper ${arxivId}`;
+    // Extract title, authors, date from content (flexible patterns)
+    const titleMatch = content.match(/# (?:Technical Review|YRSN Comparison|Review):\s*(.+)/) ||
+                       content.match(/# (.+)/);
+    const title = titleMatch ? titleMatch[1].trim() : `Paper ${arxivId}`;
 
-    const authorsMatch = content.match(/\*\*Authors\*\*: (.+)/);
-    const authors = authorsMatch ? authorsMatch[1] : "Unknown";
+    const authorsMatch = content.match(/[-*]*\s*\*\*Authors?\*\*:\s*(.+)/);
+    const authors = authorsMatch ? authorsMatch[1].trim() : "Unknown";
 
     const dateMatch = content.match(/\*\*Published\*\*: (\d{4}-\d{2}-\d{2})/);
     const publishedDate = dateMatch ? dateMatch[1] : null;
 
-    // Placeholder citation count (in real implementation, fetch from Semantic Scholar or arXiv API)
-    const citationCount = Math.floor(Math.random() * 150);
+    // Citation count not available (TODO: fetch from Semantic Scholar or arXiv API)
+    const citationCount = null;
 
     return {
       filename: f,
@@ -64,8 +71,8 @@ if (fs.existsSync(reviewsDir)) {
       relevanceScore,
       citations: citationCount,
       size: content.length,
-      arxivUrl: `https://arxiv.org/abs/${arxivIdClean}`,
-      pdfUrl: `https://arxiv.org/pdf/${arxivIdClean}`,
+      arxivUrl: `https://arxiv.org/abs/${arxivIdForUrl}`,
+      pdfUrl: `https://arxiv.org/pdf/${arxivIdForUrl}.pdf`,
     };
   });
 }

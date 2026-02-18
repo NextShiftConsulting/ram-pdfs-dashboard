@@ -4,7 +4,7 @@
     "totalReviews": 153,
     "yrsnReviews": 76,
     "techReviews": 76,
-    "lastUpdated": "2026-02-18T02:47:25.425Z"
+    "lastUpdated": "2026-02-18T03:00:52.815Z"
   },
   "papers": {
     "2601.19895v1": "2026-01-28T09:49:55.487429",
@@ -94,10 +94,10 @@
       "publishedDate": "2026-01-26",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 82,
+      "citations": null,
       "size": 6077,
-      "arxivUrl": "https://arxiv.org/abs/2601.18777v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.18777v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.18777",
+      "pdfUrl": "https://arxiv.org/pdf/2601.18777.pdf"
     },
     {
       "filename": "2601_18777v1_vs_yrsn.md",
@@ -107,11 +107,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 3,
-      "citations": 138,
+      "relevanceScore": 2,
+      "citations": null,
       "size": 774,
-      "arxivUrl": "https://arxiv.org/abs/2601.18777v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.18777v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.18777",
+      "pdfUrl": "https://arxiv.org/pdf/2601.18777.pdf"
     },
     {
       "filename": "2601_18886v1_techreview.md",
@@ -122,10 +122,10 @@
       "publishedDate": "2026-01-26",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 117,
+      "citations": null,
       "size": 5497,
-      "arxivUrl": "https://arxiv.org/abs/2601.18886v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.18886v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.18886",
+      "pdfUrl": "https://arxiv.org/pdf/2601.18886.pdf"
     },
     {
       "filename": "2601_18886v1_vs_yrsn.md",
@@ -135,11 +135,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 3,
-      "citations": 2,
+      "relevanceScore": 2,
+      "citations": null,
       "size": 777,
-      "arxivUrl": "https://arxiv.org/abs/2601.18886v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.18886v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.18886",
+      "pdfUrl": "https://arxiv.org/pdf/2601.18886.pdf"
     },
     {
       "filename": "2601_19060v1_techreview.md",
@@ -150,10 +150,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 91,
+      "citations": null,
       "size": 5918,
-      "arxivUrl": "https://arxiv.org/abs/2601.19060v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19060v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19060",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19060.pdf"
     },
     {
       "filename": "2601_19060v1_vs_yrsn.md",
@@ -163,11 +163,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 5,
-      "citations": 91,
+      "relevanceScore": 3,
+      "citations": null,
       "size": 818,
-      "arxivUrl": "https://arxiv.org/abs/2601.19060v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19060v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19060",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19060.pdf"
     },
     {
       "filename": "2601_19225v1_techreview.md",
@@ -178,10 +178,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 138,
+      "citations": null,
       "size": 6679,
-      "arxivUrl": "https://arxiv.org/abs/2601.19225v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19225v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19225",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19225.pdf"
     },
     {
       "filename": "2601_19225v1_vs_yrsn.md",
@@ -191,11 +191,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 5,
-      "citations": 88,
+      "relevanceScore": 3,
+      "citations": null,
       "size": 869,
-      "arxivUrl": "https://arxiv.org/abs/2601.19225v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19225v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19225",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19225.pdf"
     },
     {
       "filename": "2601_19260v1_techreview.md",
@@ -206,10 +206,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 101,
+      "citations": null,
       "size": 5975,
-      "arxivUrl": "https://arxiv.org/abs/2601.19260v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19260v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19260",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19260.pdf"
     },
     {
       "filename": "2601_19260v1_vs_yrsn.md",
@@ -219,11 +219,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 3,
-      "citations": 70,
+      "relevanceScore": 2,
+      "citations": null,
       "size": 745,
-      "arxivUrl": "https://arxiv.org/abs/2601.19260v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19260v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19260",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19260.pdf"
     },
     {
       "filename": "2601_19535v1_techreview.md",
@@ -234,10 +234,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 41,
+      "citations": null,
       "size": 6072,
-      "arxivUrl": "https://arxiv.org/abs/2601.19535v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19535v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19535",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19535.pdf"
     },
     {
       "filename": "2601_19535v1_vs_yrsn.md",
@@ -247,11 +247,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 3,
-      "citations": 108,
+      "relevanceScore": 2,
+      "citations": null,
       "size": 749,
-      "arxivUrl": "https://arxiv.org/abs/2601.19535v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19535v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19535",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19535.pdf"
     },
     {
       "filename": "2601_19653v1_techreview.md",
@@ -262,10 +262,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 96,
+      "citations": null,
       "size": 5786,
-      "arxivUrl": "https://arxiv.org/abs/2601.19653v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19653v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19653",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19653.pdf"
     },
     {
       "filename": "2601_19653v1_vs_yrsn.md",
@@ -276,10 +276,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 1,
-      "citations": 32,
+      "citations": null,
       "size": 625,
-      "arxivUrl": "https://arxiv.org/abs/2601.19653v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19653v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19653",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19653.pdf"
     },
     {
       "filename": "2601_19684v1_techreview.md",
@@ -290,10 +290,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 43,
+      "citations": null,
       "size": 6113,
-      "arxivUrl": "https://arxiv.org/abs/2601.19684v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19684v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19684",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19684.pdf"
     },
     {
       "filename": "2601_19684v1_vs_yrsn.md",
@@ -303,11 +303,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 4,
-      "citations": 76,
+      "relevanceScore": 2,
+      "citations": null,
       "size": 765,
-      "arxivUrl": "https://arxiv.org/abs/2601.19684v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19684v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19684",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19684.pdf"
     },
     {
       "filename": "2601_19697v1_techreview.md",
@@ -318,10 +318,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 61,
+      "citations": null,
       "size": 6220,
-      "arxivUrl": "https://arxiv.org/abs/2601.19697v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19697v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19697",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19697.pdf"
     },
     {
       "filename": "2601_19697v1_vs_yrsn.md",
@@ -331,11 +331,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 3,
-      "citations": 87,
+      "relevanceScore": 2,
+      "citations": null,
       "size": 798,
-      "arxivUrl": "https://arxiv.org/abs/2601.19697v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19697v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19697",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19697.pdf"
     },
     {
       "filename": "2601_19710v1_techreview.md",
@@ -346,10 +346,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 128,
+      "citations": null,
       "size": 5860,
-      "arxivUrl": "https://arxiv.org/abs/2601.19710v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19710v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19710",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19710.pdf"
     },
     {
       "filename": "2601_19710v1_vs_yrsn.md",
@@ -360,10 +360,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 1,
-      "citations": 4,
+      "citations": null,
       "size": 649,
-      "arxivUrl": "https://arxiv.org/abs/2601.19710v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19710v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19710",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19710.pdf"
     },
     {
       "filename": "2601_19711v1_techreview.md",
@@ -374,10 +374,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 42,
+      "citations": null,
       "size": 3995,
-      "arxivUrl": "https://arxiv.org/abs/2601.19711v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19711v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19711",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19711.pdf"
     },
     {
       "filename": "2601_19711v1_vs_yrsn.md",
@@ -388,10 +388,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 6,
-      "citations": 47,
+      "citations": null,
       "size": 2418,
-      "arxivUrl": "https://arxiv.org/abs/2601.19711v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19711v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19711",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19711.pdf"
     },
     {
       "filename": "2601_19715v1_techreview.md",
@@ -402,10 +402,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 62,
+      "citations": null,
       "size": 5865,
-      "arxivUrl": "https://arxiv.org/abs/2601.19715v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19715v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19715",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19715.pdf"
     },
     {
       "filename": "2601_19715v1_vs_yrsn.md",
@@ -415,11 +415,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 5,
-      "citations": 118,
+      "relevanceScore": 3,
+      "citations": null,
       "size": 754,
-      "arxivUrl": "https://arxiv.org/abs/2601.19715v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19715v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19715",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19715.pdf"
     },
     {
       "filename": "2601_19716v1_techreview.md",
@@ -430,10 +430,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 126,
+      "citations": null,
       "size": 5581,
-      "arxivUrl": "https://arxiv.org/abs/2601.19716v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19716v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19716",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19716.pdf"
     },
     {
       "filename": "2601_19716v1_vs_yrsn.md",
@@ -444,10 +444,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 1,
-      "citations": 141,
+      "citations": null,
       "size": 622,
-      "arxivUrl": "https://arxiv.org/abs/2601.19716v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19716v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19716",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19716.pdf"
     },
     {
       "filename": "2601_19727v1_techreview.md",
@@ -458,10 +458,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 115,
+      "citations": null,
       "size": 5306,
-      "arxivUrl": "https://arxiv.org/abs/2601.19727v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19727v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19727",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19727.pdf"
     },
     {
       "filename": "2601_19727v1_vs_yrsn.md",
@@ -472,10 +472,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 1,
-      "citations": 32,
+      "citations": null,
       "size": 678,
-      "arxivUrl": "https://arxiv.org/abs/2601.19727v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19727v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19727",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19727.pdf"
     },
     {
       "filename": "2601_19729v1_techreview.md",
@@ -486,10 +486,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 52,
+      "citations": null,
       "size": 6045,
-      "arxivUrl": "https://arxiv.org/abs/2601.19729v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19729v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19729",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19729.pdf"
     },
     {
       "filename": "2601_19729v1_vs_yrsn.md",
@@ -499,11 +499,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 2,
-      "citations": 77,
+      "relevanceScore": 1,
+      "citations": null,
       "size": 706,
-      "arxivUrl": "https://arxiv.org/abs/2601.19729v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19729v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19729",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19729.pdf"
     },
     {
       "filename": "2601_19750v1_techreview.md",
@@ -514,10 +514,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 28,
+      "citations": null,
       "size": 5415,
-      "arxivUrl": "https://arxiv.org/abs/2601.19750v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19750v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19750",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19750.pdf"
     },
     {
       "filename": "2601_19750v1_vs_yrsn.md",
@@ -528,10 +528,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 7,
-      "citations": 96,
+      "citations": null,
       "size": 4278,
-      "arxivUrl": "https://arxiv.org/abs/2601.19750v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19750v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19750",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19750.pdf"
     },
     {
       "filename": "2601_19759v1_techreview.md",
@@ -542,10 +542,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 40,
+      "citations": null,
       "size": 5640,
-      "arxivUrl": "https://arxiv.org/abs/2601.19759v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19759v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19759",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19759.pdf"
     },
     {
       "filename": "2601_19759v1_vs_yrsn.md",
@@ -555,11 +555,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 3,
-      "citations": 89,
+      "relevanceScore": 2,
+      "citations": null,
       "size": 694,
-      "arxivUrl": "https://arxiv.org/abs/2601.19759v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19759v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19759",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19759.pdf"
     },
     {
       "filename": "2601_19761v1_techreview.md",
@@ -570,10 +570,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 142,
+      "citations": null,
       "size": 5999,
-      "arxivUrl": "https://arxiv.org/abs/2601.19761v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19761v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19761",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19761.pdf"
     },
     {
       "filename": "2601_19761v1_vs_yrsn.md",
@@ -583,11 +583,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 4,
-      "citations": 104,
+      "relevanceScore": 2,
+      "citations": null,
       "size": 751,
-      "arxivUrl": "https://arxiv.org/abs/2601.19761v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19761v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19761",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19761.pdf"
     },
     {
       "filename": "2601_19762v1_techreview.md",
@@ -598,10 +598,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 80,
+      "citations": null,
       "size": 4950,
-      "arxivUrl": "https://arxiv.org/abs/2601.19762v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19762v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19762",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19762.pdf"
     },
     {
       "filename": "2601_19762v1_vs_yrsn.md",
@@ -612,10 +612,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 2,
-      "citations": 99,
+      "citations": null,
       "size": 2770,
-      "arxivUrl": "https://arxiv.org/abs/2601.19762v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19762v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19762",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19762.pdf"
     },
     {
       "filename": "2601_19766v1_techreview.md",
@@ -626,10 +626,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 4,
+      "citations": null,
       "size": 4340,
-      "arxivUrl": "https://arxiv.org/abs/2601.19766v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19766v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19766",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19766.pdf"
     },
     {
       "filename": "2601_19766v1_vs_yrsn.md",
@@ -640,10 +640,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 6,
-      "citations": 130,
+      "citations": null,
       "size": 3685,
-      "arxivUrl": "https://arxiv.org/abs/2601.19766v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19766v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19766",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19766.pdf"
     },
     {
       "filename": "2601_19811v1_techreview.md",
@@ -653,11 +653,11 @@
       "authors": "TrungKhang Tran, TrungTin Nguyen, Gersende Fort, Tung Doan, Hien Duy Nguyen",
       "publishedDate": null,
       "type": "tech",
-      "relevanceScore": 3,
-      "citations": 126,
+      "relevanceScore": null,
+      "citations": null,
       "size": 3086,
-      "arxivUrl": "https://arxiv.org/abs/2601.19811v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19811v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19811",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19811.pdf"
     },
     {
       "filename": "2601_19811v1_vs_yrsn.md",
@@ -668,10 +668,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 140,
+      "citations": null,
       "size": 1080,
-      "arxivUrl": "https://arxiv.org/abs/2601.19811v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19811v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19811",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19811.pdf"
     },
     {
       "filename": "2601_19818v1_techreview.md",
@@ -681,11 +681,11 @@
       "authors": "Kazuaki Tanaka, Kohei Yatabe",
       "publishedDate": null,
       "type": "tech",
-      "relevanceScore": 3,
-      "citations": 141,
+      "relevanceScore": null,
+      "citations": null,
       "size": 2000,
-      "arxivUrl": "https://arxiv.org/abs/2601.19818v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19818v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19818",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19818.pdf"
     },
     {
       "filename": "2601_19818v1_vs_yrsn.md",
@@ -696,10 +696,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 77,
+      "citations": null,
       "size": 696,
-      "arxivUrl": "https://arxiv.org/abs/2601.19818v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19818v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19818",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19818.pdf"
     },
     {
       "filename": "2601_19821v1_techreview.md",
@@ -709,11 +709,11 @@
       "authors": "Kun Li, Michael Ying Yang, Sami Sebastian Brandt",
       "publishedDate": null,
       "type": "tech",
-      "relevanceScore": 3,
-      "citations": 128,
+      "relevanceScore": null,
+      "citations": null,
       "size": 2243,
-      "arxivUrl": "https://arxiv.org/abs/2601.19821v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19821v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19821",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19821.pdf"
     },
     {
       "filename": "2601_19821v1_vs_yrsn.md",
@@ -724,10 +724,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 130,
+      "citations": null,
       "size": 666,
-      "arxivUrl": "https://arxiv.org/abs/2601.19821v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19821v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19821",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19821.pdf"
     },
     {
       "filename": "2601_19822v1_techreview.md",
@@ -738,10 +738,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 57,
+      "citations": null,
       "size": 6034,
-      "arxivUrl": "https://arxiv.org/abs/2601.19822v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19822v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19822",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19822.pdf"
     },
     {
       "filename": "2601_19822v1_vs_yrsn.md",
@@ -752,10 +752,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 4,
-      "citations": 134,
+      "citations": null,
       "size": 4253,
-      "arxivUrl": "https://arxiv.org/abs/2601.19822v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19822v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19822",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19822.pdf"
     },
     {
       "filename": "2601_19823v1_techreview.md",
@@ -766,10 +766,10 @@
       "publishedDate": null,
       "type": "tech",
       "relevanceScore": null,
-      "citations": 45,
+      "citations": null,
       "size": 6003,
-      "arxivUrl": "https://arxiv.org/abs/2601.19823v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19823v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19823",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19823.pdf"
     },
     {
       "filename": "2601_19823v1_vs_yrsn.md",
@@ -780,10 +780,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 7,
-      "citations": 149,
+      "citations": null,
       "size": 6149,
-      "arxivUrl": "https://arxiv.org/abs/2601.19823v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19823v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19823",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19823.pdf"
     },
     {
       "filename": "2601_19824v1_techreview.md",
@@ -794,10 +794,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 84,
+      "citations": null,
       "size": 4196,
-      "arxivUrl": "https://arxiv.org/abs/2601.19824v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19824v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19824",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19824.pdf"
     },
     {
       "filename": "2601_19824v1_vs_yrsn.md",
@@ -808,10 +808,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 5,
-      "citations": 74,
+      "citations": null,
       "size": 2481,
-      "arxivUrl": "https://arxiv.org/abs/2601.19824v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19824v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19824",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19824.pdf"
     },
     {
       "filename": "2601_19825v1_techreview.md",
@@ -822,10 +822,10 @@
       "publishedDate": null,
       "type": "tech",
       "relevanceScore": null,
-      "citations": 135,
+      "citations": null,
       "size": 5256,
-      "arxivUrl": "https://arxiv.org/abs/2601.19825v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19825v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19825",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19825.pdf"
     },
     {
       "filename": "2601_19825v1_vs_yrsn.md",
@@ -836,10 +836,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 7,
-      "citations": 115,
+      "citations": null,
       "size": 7568,
-      "arxivUrl": "https://arxiv.org/abs/2601.19825v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19825v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19825",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19825.pdf"
     },
     {
       "filename": "2601_19827v1_techreview.md",
@@ -850,10 +850,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 46,
+      "citations": null,
       "size": 6655,
-      "arxivUrl": "https://arxiv.org/abs/2601.19827v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19827v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19827",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19827.pdf"
     },
     {
       "filename": "2601_19827v1_vs_yrsn.md",
@@ -863,11 +863,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 3,
-      "citations": 147,
+      "relevanceScore": 2,
+      "citations": null,
       "size": 808,
-      "arxivUrl": "https://arxiv.org/abs/2601.19827v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19827v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19827",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19827.pdf"
     },
     {
       "filename": "2601_19831v1_techreview.md",
@@ -878,10 +878,10 @@
       "publishedDate": null,
       "type": "tech",
       "relevanceScore": null,
-      "citations": 121,
+      "citations": null,
       "size": 5834,
-      "arxivUrl": "https://arxiv.org/abs/2601.19831v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19831v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19831",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19831.pdf"
     },
     {
       "filename": "2601_19831v1_vs_yrsn.md",
@@ -892,10 +892,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 6,
-      "citations": 124,
+      "citations": null,
       "size": 6591,
-      "arxivUrl": "https://arxiv.org/abs/2601.19831v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19831v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19831",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19831.pdf"
     },
     {
       "filename": "2601_19832v1_techreview.md",
@@ -906,10 +906,10 @@
       "publishedDate": null,
       "type": "tech",
       "relevanceScore": null,
-      "citations": 59,
+      "citations": null,
       "size": 5179,
-      "arxivUrl": "https://arxiv.org/abs/2601.19832v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19832v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19832",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19832.pdf"
     },
     {
       "filename": "2601_19832v1_vs_yrsn.md",
@@ -920,10 +920,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 7,
-      "citations": 116,
+      "citations": null,
       "size": 5277,
-      "arxivUrl": "https://arxiv.org/abs/2601.19832v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19832v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19832",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19832.pdf"
     },
     {
       "filename": "2601_19833v1_techreview.md",
@@ -934,10 +934,10 @@
       "publishedDate": null,
       "type": "tech",
       "relevanceScore": null,
-      "citations": 82,
+      "citations": null,
       "size": 6232,
-      "arxivUrl": "https://arxiv.org/abs/2601.19833v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19833v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19833",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19833.pdf"
     },
     {
       "filename": "2601_19833v1_vs_yrsn.md",
@@ -948,10 +948,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 6,
-      "citations": 121,
+      "citations": null,
       "size": 4908,
-      "arxivUrl": "https://arxiv.org/abs/2601.19833v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19833v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19833",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19833.pdf"
     },
     {
       "filename": "2601_19834v1_techreview.md",
@@ -962,10 +962,10 @@
       "publishedDate": null,
       "type": "tech",
       "relevanceScore": null,
-      "citations": 11,
+      "citations": null,
       "size": 5547,
-      "arxivUrl": "https://arxiv.org/abs/2601.19834v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19834v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19834",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19834.pdf"
     },
     {
       "filename": "2601_19834v1_vs_yrsn.md",
@@ -976,10 +976,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 6,
-      "citations": 79,
+      "citations": null,
       "size": 6273,
-      "arxivUrl": "https://arxiv.org/abs/2601.19834v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19834v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19834",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19834.pdf"
     },
     {
       "filename": "2601_19835v1_techreview.md",
@@ -990,10 +990,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 84,
+      "citations": null,
       "size": 4311,
-      "arxivUrl": "https://arxiv.org/abs/2601.19835v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19835v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19835",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19835.pdf"
     },
     {
       "filename": "2601_19835v1_vs_yrsn.md",
@@ -1004,10 +1004,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 2,
-      "citations": 77,
+      "citations": null,
       "size": 2503,
-      "arxivUrl": "https://arxiv.org/abs/2601.19835v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19835v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19835",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19835.pdf"
     },
     {
       "filename": "2601_19836v1_techreview.md",
@@ -1018,10 +1018,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 82,
+      "citations": null,
       "size": 1706,
-      "arxivUrl": "https://arxiv.org/abs/2601.19836v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19836v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19836",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19836.pdf"
     },
     {
       "filename": "2601_19836v1_vs_yrsn.md",
@@ -1032,10 +1032,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 0,
-      "citations": 111,
+      "citations": null,
       "size": 1502,
-      "arxivUrl": "https://arxiv.org/abs/2601.19836v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19836v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19836",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19836.pdf"
     },
     {
       "filename": "2601_19839v1_techreview.md",
@@ -1046,10 +1046,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 22,
+      "citations": null,
       "size": 5868,
-      "arxivUrl": "https://arxiv.org/abs/2601.19839v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19839v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19839",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19839.pdf"
     },
     {
       "filename": "2601_19839v1_vs_yrsn.md",
@@ -1059,11 +1059,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 5,
-      "citations": 17,
+      "relevanceScore": 3,
+      "citations": null,
       "size": 743,
-      "arxivUrl": "https://arxiv.org/abs/2601.19839v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19839v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19839",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19839.pdf"
     },
     {
       "filename": "2601_19843v1_techreview.md",
@@ -1074,10 +1074,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 98,
+      "citations": null,
       "size": 2406,
-      "arxivUrl": "https://arxiv.org/abs/2601.19843v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19843v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19843",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19843.pdf"
     },
     {
       "filename": "2601_19843v1_vs_yrsn.md",
@@ -1088,10 +1088,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 2,
-      "citations": 20,
+      "citations": null,
       "size": 1626,
-      "arxivUrl": "https://arxiv.org/abs/2601.19843v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19843v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19843",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19843.pdf"
     },
     {
       "filename": "2601_19844v1_techreview.md",
@@ -1101,11 +1101,11 @@
       "authors": "Martin Bauer, Sreemanti Chakraborti",
       "publishedDate": null,
       "type": "tech",
-      "relevanceScore": 3,
-      "citations": 53,
+      "relevanceScore": null,
+      "citations": null,
       "size": 2239,
-      "arxivUrl": "https://arxiv.org/abs/2601.19844v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19844v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19844",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19844.pdf"
     },
     {
       "filename": "2601_19844v1_vs_yrsn.md",
@@ -1116,10 +1116,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 77,
+      "citations": null,
       "size": 611,
-      "arxivUrl": "https://arxiv.org/abs/2601.19844v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19844v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19844",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19844.pdf"
     },
     {
       "filename": "2601_19847v1_techreview.md",
@@ -1130,10 +1130,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 111,
+      "citations": null,
       "size": 5827,
-      "arxivUrl": "https://arxiv.org/abs/2601.19847v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19847v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19847",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19847.pdf"
     },
     {
       "filename": "2601_19847v1_vs_yrsn.md",
@@ -1144,10 +1144,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 1,
-      "citations": 38,
+      "citations": null,
       "size": 711,
-      "arxivUrl": "https://arxiv.org/abs/2601.19847v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19847v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19847",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19847.pdf"
     },
     {
       "filename": "2601_19848v1_techreview.md",
@@ -1158,10 +1158,10 @@
       "publishedDate": null,
       "type": "tech",
       "relevanceScore": null,
-      "citations": 83,
+      "citations": null,
       "size": 7063,
-      "arxivUrl": "https://arxiv.org/abs/2601.19848v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19848v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19848",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19848.pdf"
     },
     {
       "filename": "2601_19848v1_vs_yrsn.md",
@@ -1172,10 +1172,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 6,
-      "citations": 83,
+      "citations": null,
       "size": 4895,
-      "arxivUrl": "https://arxiv.org/abs/2601.19848v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19848v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19848",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19848.pdf"
     },
     {
       "filename": "2601_19849v1_techreview.md",
@@ -1186,10 +1186,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 101,
+      "citations": null,
       "size": 2646,
-      "arxivUrl": "https://arxiv.org/abs/2601.19849v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19849v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19849",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19849.pdf"
     },
     {
       "filename": "2601_19849v1_vs_yrsn.md",
@@ -1200,10 +1200,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 0,
-      "citations": 35,
+      "citations": null,
       "size": 1478,
-      "arxivUrl": "https://arxiv.org/abs/2601.19849v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19849v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19849",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19849.pdf"
     },
     {
       "filename": "2601_19850v1_techreview.md",
@@ -1214,10 +1214,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 124,
+      "citations": null,
       "size": 5648,
-      "arxivUrl": "https://arxiv.org/abs/2601.19850v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19850v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19850",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19850.pdf"
     },
     {
       "filename": "2601_19850v1_vs_yrsn.md",
@@ -1227,11 +1227,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 4,
-      "citations": 71,
+      "relevanceScore": 2,
+      "citations": null,
       "size": 731,
-      "arxivUrl": "https://arxiv.org/abs/2601.19850v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19850v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19850",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19850.pdf"
     },
     {
       "filename": "2601_19851v1_techreview.md",
@@ -1242,10 +1242,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 35,
+      "citations": null,
       "size": 5748,
-      "arxivUrl": "https://arxiv.org/abs/2601.19851v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19851v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19851",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19851.pdf"
     },
     {
       "filename": "2601_19851v1_vs_yrsn.md",
@@ -1255,11 +1255,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 5,
-      "citations": 60,
+      "relevanceScore": 3,
+      "citations": null,
       "size": 789,
-      "arxivUrl": "https://arxiv.org/abs/2601.19851v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19851v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19851",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19851.pdf"
     },
     {
       "filename": "2601_19852v1_techreview.md",
@@ -1270,10 +1270,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 34,
+      "citations": null,
       "size": 6337,
-      "arxivUrl": "https://arxiv.org/abs/2601.19852v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19852v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19852",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19852.pdf"
     },
     {
       "filename": "2601_19852v1_vs_yrsn.md",
@@ -1284,10 +1284,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 1,
-      "citations": 111,
+      "citations": null,
       "size": 615,
-      "arxivUrl": "https://arxiv.org/abs/2601.19852v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19852v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19852",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19852.pdf"
     },
     {
       "filename": "2601_19853v1_techreview.md",
@@ -1298,10 +1298,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 18,
+      "citations": null,
       "size": 4318,
-      "arxivUrl": "https://arxiv.org/abs/2601.19853v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19853v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19853",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19853.pdf"
     },
     {
       "filename": "2601_19853v1_vs_yrsn.md",
@@ -1312,10 +1312,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 5,
-      "citations": 148,
+      "citations": null,
       "size": 2418,
-      "arxivUrl": "https://arxiv.org/abs/2601.19853v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19853v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19853",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19853.pdf"
     },
     {
       "filename": "2601_19856v1_techreview.md",
@@ -1325,11 +1325,11 @@
       "authors": "Giulio Campagna, Marta Lagomarsino, Marta Lorenzini, Dimitrios Chrysostomou, Matthias Rehm",
       "publishedDate": "2026-01-27",
       "type": "tech",
-      "relevanceScore": 0,
-      "citations": 58,
+      "relevanceScore": null,
+      "citations": null,
       "size": 5636,
-      "arxivUrl": "https://arxiv.org/abs/2601.19856v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19856v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19856",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19856.pdf"
     },
     {
       "filename": "2601_19856v1_vs_yrsn.md",
@@ -1339,11 +1339,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 3,
-      "citations": 36,
+      "relevanceScore": 2,
+      "citations": null,
       "size": 730,
-      "arxivUrl": "https://arxiv.org/abs/2601.19856v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19856v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19856",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19856.pdf"
     },
     {
       "filename": "2601_19857v1_techreview.md",
@@ -1354,10 +1354,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 23,
+      "citations": null,
       "size": 1936,
-      "arxivUrl": "https://arxiv.org/abs/2601.19857v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19857v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19857",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19857.pdf"
     },
     {
       "filename": "2601_19857v1_vs_yrsn.md",
@@ -1368,10 +1368,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 1,
-      "citations": 29,
+      "citations": null,
       "size": 1426,
-      "arxivUrl": "https://arxiv.org/abs/2601.19857v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19857v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19857",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19857.pdf"
     },
     {
       "filename": "2601_19858v1_techreview.md",
@@ -1382,10 +1382,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 131,
+      "citations": null,
       "size": 5287,
-      "arxivUrl": "https://arxiv.org/abs/2601.19858v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19858v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19858",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19858.pdf"
     },
     {
       "filename": "2601_19858v1_vs_yrsn.md",
@@ -1396,10 +1396,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 2,
-      "citations": 14,
+      "citations": null,
       "size": 3058,
-      "arxivUrl": "https://arxiv.org/abs/2601.19858v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19858v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19858",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19858.pdf"
     },
     {
       "filename": "2601_19859v1_techreview.md",
@@ -1410,10 +1410,10 @@
       "publishedDate": null,
       "type": "tech",
       "relevanceScore": null,
-      "citations": 99,
+      "citations": null,
       "size": 6260,
-      "arxivUrl": "https://arxiv.org/abs/2601.19859v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19859v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19859",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19859.pdf"
     },
     {
       "filename": "2601_19859v1_vs_yrsn.md",
@@ -1424,10 +1424,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 6,
-      "citations": 84,
+      "citations": null,
       "size": 6581,
-      "arxivUrl": "https://arxiv.org/abs/2601.19859v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19859v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19859",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19859.pdf"
     },
     {
       "filename": "2601_19860v1_techreview.md",
@@ -1437,11 +1437,11 @@
       "authors": "Ben Forrás",
       "publishedDate": null,
       "type": "tech",
-      "relevanceScore": 1,
-      "citations": 59,
+      "relevanceScore": null,
+      "citations": null,
       "size": 1275,
-      "arxivUrl": "https://arxiv.org/abs/2601.19860v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19860v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19860",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19860.pdf"
     },
     {
       "filename": "2601_19860v1_vs_yrsn.md",
@@ -1452,10 +1452,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 1,
-      "citations": 77,
+      "citations": null,
       "size": 609,
-      "arxivUrl": "https://arxiv.org/abs/2601.19860v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19860v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19860",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19860.pdf"
     },
     {
       "filename": "2601_19861v1_techreview.md",
@@ -1465,11 +1465,11 @@
       "authors": "Enea Di Dio, Sveva Castello, Camille Bonvin",
       "publishedDate": null,
       "type": "tech",
-      "relevanceScore": 3,
-      "citations": 31,
+      "relevanceScore": null,
+      "citations": null,
       "size": 1915,
-      "arxivUrl": "https://arxiv.org/abs/2601.19861v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19861v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19861",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19861.pdf"
     },
     {
       "filename": "2601_19861v1_vs_yrsn.md",
@@ -1480,10 +1480,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 30,
+      "citations": null,
       "size": 640,
-      "arxivUrl": "https://arxiv.org/abs/2601.19861v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19861v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19861",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19861.pdf"
     },
     {
       "filename": "2601_19862v1_techreview.md",
@@ -1494,10 +1494,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 96,
+      "citations": null,
       "size": 5578,
-      "arxivUrl": "https://arxiv.org/abs/2601.19862v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19862v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19862",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19862.pdf"
     },
     {
       "filename": "2601_19862v1_vs_yrsn.md",
@@ -1507,11 +1507,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 2,
-      "citations": 10,
+      "relevanceScore": 1,
+      "citations": null,
       "size": 648,
-      "arxivUrl": "https://arxiv.org/abs/2601.19862v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19862v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19862",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19862.pdf"
     },
     {
       "filename": "2601_19863v1_techreview.md",
@@ -1521,11 +1521,11 @@
       "authors": "Shin'ichiro Ando, Martin Moro, Youyou Li",
       "publishedDate": null,
       "type": "tech",
-      "relevanceScore": 3,
-      "citations": 125,
+      "relevanceScore": null,
+      "citations": null,
       "size": 2253,
-      "arxivUrl": "https://arxiv.org/abs/2601.19863v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19863v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19863",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19863.pdf"
     },
     {
       "filename": "2601_19863v1_vs_yrsn.md",
@@ -1536,10 +1536,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 94,
+      "citations": null,
       "size": 624,
-      "arxivUrl": "https://arxiv.org/abs/2601.19863v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19863v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19863",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19863.pdf"
     },
     {
       "filename": "2601_19866v1_techreview.md",
@@ -1549,11 +1549,11 @@
       "authors": "Manuel Cavieres, Sergey E. Koposov, Elena Maria Rossi, Zephyr Penoyre, Sill Verberne",
       "publishedDate": null,
       "type": "tech",
-      "relevanceScore": 1,
-      "citations": 134,
+      "relevanceScore": null,
+      "citations": null,
       "size": 2082,
-      "arxivUrl": "https://arxiv.org/abs/2601.19866v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19866v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19866",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19866.pdf"
     },
     {
       "filename": "2601_19866v1_vs_yrsn.md",
@@ -1564,10 +1564,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 1,
-      "citations": 83,
+      "citations": null,
       "size": 544,
-      "arxivUrl": "https://arxiv.org/abs/2601.19866v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19866v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19866",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19866.pdf"
     },
     {
       "filename": "2601_19867v1_techreview.md",
@@ -1577,11 +1577,11 @@
       "authors": "Tareq Si Salem",
       "publishedDate": null,
       "type": "tech",
-      "relevanceScore": 3,
-      "citations": 131,
+      "relevanceScore": null,
+      "citations": null,
       "size": 1324,
-      "arxivUrl": "https://arxiv.org/abs/2601.19867v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19867v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19867",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19867.pdf"
     },
     {
       "filename": "2601_19867v1_vs_yrsn.md",
@@ -1592,10 +1592,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 67,
+      "citations": null,
       "size": 591,
-      "arxivUrl": "https://arxiv.org/abs/2601.19867v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19867v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19867",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19867.pdf"
     },
     {
       "filename": "2601_19868v1_techreview.md",
@@ -1606,10 +1606,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 0,
+      "citations": null,
       "size": 3712,
-      "arxivUrl": "https://arxiv.org/abs/2601.19868v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19868v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19868",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19868.pdf"
     },
     {
       "filename": "2601_19868v1_vs_yrsn.md",
@@ -1620,10 +1620,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 2,
-      "citations": 40,
+      "citations": null,
       "size": 2473,
-      "arxivUrl": "https://arxiv.org/abs/2601.19868v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19868v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19868",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19868.pdf"
     },
     {
       "filename": "2601_19870v1_techreview.md",
@@ -1634,10 +1634,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 133,
+      "citations": null,
       "size": 4290,
-      "arxivUrl": "https://arxiv.org/abs/2601.19870v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19870v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19870",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19870.pdf"
     },
     {
       "filename": "2601_19870v1_vs_yrsn.md",
@@ -1648,10 +1648,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 2,
-      "citations": 127,
+      "citations": null,
       "size": 3250,
-      "arxivUrl": "https://arxiv.org/abs/2601.19870v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19870v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19870",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19870.pdf"
     },
     {
       "filename": "2601_19871v1_techreview.md",
@@ -1661,11 +1661,11 @@
       "authors": "Nicholas Cheng",
       "publishedDate": "2026-01-27",
       "type": "tech",
-      "relevanceScore": 0,
-      "citations": 65,
+      "relevanceScore": null,
+      "citations": null,
       "size": 5976,
-      "arxivUrl": "https://arxiv.org/abs/2601.19871v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19871v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19871",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19871.pdf"
     },
     {
       "filename": "2601_19871v1_vs_yrsn.md",
@@ -1675,11 +1675,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 5,
-      "citations": 116,
+      "relevanceScore": 3,
+      "citations": null,
       "size": 771,
-      "arxivUrl": "https://arxiv.org/abs/2601.19871v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19871v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19871",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19871.pdf"
     },
     {
       "filename": "2601_19876v1_techreview.md",
@@ -1690,10 +1690,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 99,
+      "citations": null,
       "size": 2664,
-      "arxivUrl": "https://arxiv.org/abs/2601.19876v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19876v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19876",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19876.pdf"
     },
     {
       "filename": "2601_19876v1_vs_yrsn.md",
@@ -1704,10 +1704,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 70,
+      "citations": null,
       "size": 1619,
-      "arxivUrl": "https://arxiv.org/abs/2601.19876v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19876v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19876",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19876.pdf"
     },
     {
       "filename": "2601_19879v1_techreview.md",
@@ -1718,10 +1718,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 6,
+      "citations": null,
       "size": 2416,
-      "arxivUrl": "https://arxiv.org/abs/2601.19879v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19879v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19879",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19879.pdf"
     },
     {
       "filename": "2601_19879v1_vs_yrsn.md",
@@ -1732,10 +1732,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 0,
-      "citations": 124,
+      "citations": null,
       "size": 1527,
-      "arxivUrl": "https://arxiv.org/abs/2601.19879v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19879v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19879",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19879.pdf"
     },
     {
       "filename": "2601_19880v1_techreview.md",
@@ -1746,10 +1746,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 140,
+      "citations": null,
       "size": 2790,
-      "arxivUrl": "https://arxiv.org/abs/2601.19880v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19880v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19880",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19880.pdf"
     },
     {
       "filename": "2601_19880v1_vs_yrsn.md",
@@ -1760,10 +1760,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 1,
-      "citations": 87,
+      "citations": null,
       "size": 1648,
-      "arxivUrl": "https://arxiv.org/abs/2601.19880v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19880v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19880",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19880.pdf"
     },
     {
       "filename": "2601_19882v1_techreview.md",
@@ -1773,11 +1773,11 @@
       "authors": "Shengzhi Zhang, Gabriel Silva Freitas, Vivien S. Zapf, Minseong Lee, Wonjune Choi",
       "publishedDate": null,
       "type": "tech",
-      "relevanceScore": 3,
-      "citations": 130,
+      "relevanceScore": null,
+      "citations": null,
       "size": 2132,
-      "arxivUrl": "https://arxiv.org/abs/2601.19882v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19882v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19882",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19882.pdf"
     },
     {
       "filename": "2601_19882v1_vs_yrsn.md",
@@ -1788,10 +1788,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 105,
+      "citations": null,
       "size": 633,
-      "arxivUrl": "https://arxiv.org/abs/2601.19882v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19882v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19882",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19882.pdf"
     },
     {
       "filename": "2601_19883v1_techreview.md",
@@ -1801,11 +1801,11 @@
       "authors": "Gang Li, Chuan-Qiang Song, Feng-Jie Tang, Jiang-Hao Yu",
       "publishedDate": null,
       "type": "tech",
-      "relevanceScore": 8,
-      "citations": 58,
+      "relevanceScore": null,
+      "citations": null,
       "size": 2404,
-      "arxivUrl": "https://arxiv.org/abs/2601.19883v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19883v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19883",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19883.pdf"
     },
     {
       "filename": "2601_19883v1_vs_yrsn.md",
@@ -1816,10 +1816,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 126,
+      "citations": null,
       "size": 667,
-      "arxivUrl": "https://arxiv.org/abs/2601.19883v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19883v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19883",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19883.pdf"
     },
     {
       "filename": "2601_19884v1_techreview.md",
@@ -1830,10 +1830,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 25,
+      "citations": null,
       "size": 2285,
-      "arxivUrl": "https://arxiv.org/abs/2601.19884v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19884v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19884",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19884.pdf"
     },
     {
       "filename": "2601_19884v1_vs_yrsn.md",
@@ -1844,10 +1844,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 72,
+      "citations": null,
       "size": 1582,
-      "arxivUrl": "https://arxiv.org/abs/2601.19884v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19884v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19884",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19884.pdf"
     },
     {
       "filename": "2601_19886v1_techreview.md",
@@ -1858,10 +1858,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 38,
+      "citations": null,
       "size": 3833,
-      "arxivUrl": "https://arxiv.org/abs/2601.19886v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19886v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19886",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19886.pdf"
     },
     {
       "filename": "2601_19886v1_vs_yrsn.md",
@@ -1872,10 +1872,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 3,
+      "citations": null,
       "size": 3106,
-      "arxivUrl": "https://arxiv.org/abs/2601.19886v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19886v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19886",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19886.pdf"
     },
     {
       "filename": "2601_19887v1_techreview.md",
@@ -1886,10 +1886,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 116,
+      "citations": null,
       "size": 2139,
-      "arxivUrl": "https://arxiv.org/abs/2601.19887v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19887v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19887",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19887.pdf"
     },
     {
       "filename": "2601_19887v1_vs_yrsn.md",
@@ -1900,10 +1900,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 2,
-      "citations": 42,
+      "citations": null,
       "size": 1506,
-      "arxivUrl": "https://arxiv.org/abs/2601.19887v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19887v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19887",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19887.pdf"
     },
     {
       "filename": "2601_19888v1_techreview.md",
@@ -1914,10 +1914,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 70,
+      "citations": null,
       "size": 6795,
-      "arxivUrl": "https://arxiv.org/abs/2601.19888v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19888v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19888",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19888.pdf"
     },
     {
       "filename": "2601_19888v1_vs_yrsn.md",
@@ -1928,10 +1928,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 64,
+      "citations": null,
       "size": 3242,
-      "arxivUrl": "https://arxiv.org/abs/2601.19888v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19888v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19888",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19888.pdf"
     },
     {
       "filename": "2601_19889v1_techreview.md",
@@ -1942,10 +1942,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 125,
+      "citations": null,
       "size": 4964,
-      "arxivUrl": "https://arxiv.org/abs/2601.19889v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19889v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19889",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19889.pdf"
     },
     {
       "filename": "2601_19889v1_vs_yrsn.md",
@@ -1956,10 +1956,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 98,
+      "citations": null,
       "size": 2708,
-      "arxivUrl": "https://arxiv.org/abs/2601.19889v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19889v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19889",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19889.pdf"
     },
     {
       "filename": "2601_19890v1_techreview.md",
@@ -1970,24 +1970,24 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 21,
+      "citations": null,
       "size": 4567,
-      "arxivUrl": "https://arxiv.org/abs/2601.19890v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19890v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19890",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19890.pdf"
     },
     {
       "filename": "2601_19890v1_vs_yrsn.md",
       "arxivId": "2601_19890v1",
       "arxivIdClean": "2601.19890v1",
-      "title": "Paper 2601_19890v1",
+      "title": "Overall Relevance Score: 2/10",
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 2,
-      "citations": 147,
+      "citations": null,
       "size": 1434,
-      "arxivUrl": "https://arxiv.org/abs/2601.19890v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19890v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19890",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19890.pdf"
     },
     {
       "filename": "2601_19891v1_techreview.md",
@@ -1998,10 +1998,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 93,
+      "citations": null,
       "size": 6096,
-      "arxivUrl": "https://arxiv.org/abs/2601.19891v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19891v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19891",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19891.pdf"
     },
     {
       "filename": "2601_19891v1_vs_yrsn.md",
@@ -2012,10 +2012,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 2,
-      "citations": 70,
+      "citations": null,
       "size": 3342,
-      "arxivUrl": "https://arxiv.org/abs/2601.19891v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19891v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19891",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19891.pdf"
     },
     {
       "filename": "2601_19893v1_techreview.md",
@@ -2026,10 +2026,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 133,
+      "citations": null,
       "size": 3775,
-      "arxivUrl": "https://arxiv.org/abs/2601.19893v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19893v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19893",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19893.pdf"
     },
     {
       "filename": "2601_19893v1_vs_yrsn.md",
@@ -2040,10 +2040,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 30,
+      "citations": null,
       "size": 3697,
-      "arxivUrl": "https://arxiv.org/abs/2601.19893v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19893v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19893",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19893.pdf"
     },
     {
       "filename": "2601_19894v1_techreview.md",
@@ -2054,10 +2054,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 127,
+      "citations": null,
       "size": 4117,
-      "arxivUrl": "https://arxiv.org/abs/2601.19894v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19894v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19894",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19894.pdf"
     },
     {
       "filename": "2601_19894v1_vs_yrsn.md",
@@ -2068,10 +2068,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 33,
+      "citations": null,
       "size": 3930,
-      "arxivUrl": "https://arxiv.org/abs/2601.19894v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19894v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19894",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19894.pdf"
     },
     {
       "filename": "2601_19895v1_techreview.md",
@@ -2082,10 +2082,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 35,
+      "citations": null,
       "size": 2266,
-      "arxivUrl": "https://arxiv.org/abs/2601.19895v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19895v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19895",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19895.pdf"
     },
     {
       "filename": "2601_19895v1_vs_yrsn.md",
@@ -2096,10 +2096,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 1,
-      "citations": 52,
+      "citations": null,
       "size": 1545,
-      "arxivUrl": "https://arxiv.org/abs/2601.19895v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19895v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19895",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19895.pdf"
     },
     {
       "filename": "2601_19896v1_techreview.md",
@@ -2110,10 +2110,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 106,
+      "citations": null,
       "size": 5231,
-      "arxivUrl": "https://arxiv.org/abs/2601.19896v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19896v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19896",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19896.pdf"
     },
     {
       "filename": "2601_19896v1_vs_yrsn.md",
@@ -2124,10 +2124,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 3,
-      "citations": 143,
+      "citations": null,
       "size": 4398,
-      "arxivUrl": "https://arxiv.org/abs/2601.19896v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19896v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19896",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19896.pdf"
     },
     {
       "filename": "2601_19897v1_techreview.md",
@@ -2138,10 +2138,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 61,
+      "citations": null,
       "size": 5776,
-      "arxivUrl": "https://arxiv.org/abs/2601.19897v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19897v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19897",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19897.pdf"
     },
     {
       "filename": "2601_19897v1_vs_yrsn.md",
@@ -2151,11 +2151,11 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 5,
-      "citations": 137,
+      "relevanceScore": 3,
+      "citations": null,
       "size": 731,
-      "arxivUrl": "https://arxiv.org/abs/2601.19897v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19897v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19897",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19897.pdf"
     },
     {
       "filename": "2601_19898v1_techreview.md",
@@ -2166,10 +2166,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 87,
+      "citations": null,
       "size": 5868,
-      "arxivUrl": "https://arxiv.org/abs/2601.19898v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19898v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19898",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19898.pdf"
     },
     {
       "filename": "2601_19898v1_vs_yrsn.md",
@@ -2180,10 +2180,10 @@
       "publishedDate": null,
       "type": "yrsn",
       "relevanceScore": 6,
-      "citations": 60,
+      "citations": null,
       "size": 4325,
-      "arxivUrl": "https://arxiv.org/abs/2601.19898v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19898v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19898",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19898.pdf"
     },
     {
       "filename": "2601_19899v1_techreview.md",
@@ -2194,10 +2194,10 @@
       "publishedDate": "2026-01-27",
       "type": "tech",
       "relevanceScore": null,
-      "citations": 18,
+      "citations": null,
       "size": 6286,
-      "arxivUrl": "https://arxiv.org/abs/2601.19899v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19899v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19899",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19899.pdf"
     },
     {
       "filename": "2601_19899v1_vs_yrsn.md",
@@ -2207,25 +2207,25 @@
       "authors": "Unknown",
       "publishedDate": null,
       "type": "yrsn",
-      "relevanceScore": 5,
-      "citations": 119,
+      "relevanceScore": 3,
+      "citations": null,
       "size": 802,
-      "arxivUrl": "https://arxiv.org/abs/2601.19899v1",
-      "pdfUrl": "https://arxiv.org/pdf/2601.19899v1"
+      "arxivUrl": "https://arxiv.org/abs/2601.19899",
+      "pdfUrl": "https://arxiv.org/pdf/2601.19899.pdf"
     },
     {
       "filename": "WEEKLY_SUMMARY_20260128.md",
       "arxivId": "WEEKLY_SUMMARY",
       "arxivIdClean": "WEEKLY.SUMMARY",
-      "title": "Paper WEEKLY_SUMMARY",
+      "title": "YRSN Research Monitor - Weekly Summary",
       "authors": "Unknown",
       "publishedDate": null,
       "type": "other",
       "relevanceScore": null,
-      "citations": 4,
+      "citations": null,
       "size": 2846,
       "arxivUrl": "https://arxiv.org/abs/WEEKLY.SUMMARY",
-      "pdfUrl": "https://arxiv.org/pdf/WEEKLY.SUMMARY"
+      "pdfUrl": "https://arxiv.org/pdf/WEEKLY.SUMMARY.pdf"
     }
   ],
   "byType": {
@@ -2234,14 +2234,13 @@
     "other": 1
   },
   "relevanceDistribution": {
-    "0": 5,
+    "0": 3,
     "1": 13,
-    "2": 11,
-    "3": 33,
-    "4": 4,
-    "5": 10,
+    "2": 20,
+    "3": 25,
+    "4": 1,
+    "5": 2,
     "6": 8,
-    "7": 4,
-    "8": 1
+    "7": 4
   }
 }

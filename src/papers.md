@@ -60,11 +60,14 @@ if (relevanceFilter !== "All") {
   }
 }
 
-// Topic/keyword filter
+// Topic/keyword filter (searches title, authors, filename, and arxivId)
 if (topicFilter && topicFilter.trim() !== "") {
+  const query = topicFilter.toLowerCase();
   filteredReviews = filteredReviews.filter(r =>
-    r.filename.toLowerCase().includes(topicFilter.toLowerCase()) ||
-    r.arxivId.toLowerCase().includes(topicFilter.toLowerCase())
+    r.filename.toLowerCase().includes(query) ||
+    r.arxivId.toLowerCase().includes(query) ||
+    (r.title && r.title.toLowerCase().includes(query)) ||
+    (r.authors && r.authors.toLowerCase().includes(query))
   );
 }
 
@@ -165,22 +168,34 @@ scoredReviews.length > 0 ? Plot.plot({
 ```js
 // BibTeX export functionality
 function generateBibTeX(reviews) {
+  // Escape LaTeX special characters
+  function escapeLaTeX(str) {
+    if (!str) return str;
+    return str.replace(/([&%$#_{}~^\\])/g, '\\$1');
+  }
+
   return reviews.map(r => {
     const arxivIdClean = r.arxivIdClean || r.arxivId.replace(/_/g, '.');
+    const arxivIdNoVersion = arxivIdClean.replace(/v\d+$/, '');
     const year = r.publishedDate ? r.publishedDate.substring(0, 4) : `20${r.arxivId.substring(0, 2)}`;
     const month = r.publishedDate ? r.publishedDate.substring(5, 7) : r.arxivId.substring(2, 4);
-    const bibtexKey = `arxiv${arxivIdClean.replace(/\./g, '_')}`;
-    const title = r.title || `Paper ${r.arxivId}`;
-    const authors = r.authors || "Author Name";
+    const bibtexKey = `arxiv${arxivIdNoVersion.replace(/\./g, '_')}`;
+    const title = escapeLaTeX(r.title || `Paper ${r.arxivId}`);
+
+    // Format authors properly for BibTeX (comma-separated or "and"-separated)
+    const authorList = r.authors ?
+      r.authors.split(/,\s*(?![^()]*\))/).map(a => a.trim()).join(' and ') :
+      "Author Name";
+    const authors = escapeLaTeX(authorList);
 
     return `@article{${bibtexKey},
   title = {{${title}}},
   author = {${authors}},
-  journal = {arXiv preprint arXiv:${arxivIdClean}},
+  journal = {arXiv preprint arXiv:${arxivIdNoVersion}},
   year = {${year}},
   month = {${month}},
-  url = {${r.arxivUrl || `https://arxiv.org/abs/${arxivIdClean}`}},
-  note = {Relevance Score: ${r.relevanceScore || 'N/A'}, Citations: ${r.citations || 'N/A'}}
+  url = {${r.arxivUrl || `https://arxiv.org/abs/${arxivIdNoVersion}`}},
+  note = {Relevance Score: ${r.relevanceScore || 'N/A'}/10, YRSN Type: ${r.type}}
 }`;
   }).join('\n\n');
 }
