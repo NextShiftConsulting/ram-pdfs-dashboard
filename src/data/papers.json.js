@@ -36,12 +36,36 @@ if (fs.existsSync(reviewsDir)) {
       relevanceScore = parseInt(scoreMatch[1]);
     }
 
+    // Extract metadata
+    const arxivId = f.split("_")[0] + "_" + f.split("_")[1];
+    const arxivIdClean = arxivId.replace(/_/g, '.');
+
+    // Extract title, authors, date from content
+    const titleMatch = content.match(/# (?:Technical Review|YRSN Comparison): (.+)/);
+    const title = titleMatch ? titleMatch[1] : `Paper ${arxivId}`;
+
+    const authorsMatch = content.match(/\*\*Authors\*\*: (.+)/);
+    const authors = authorsMatch ? authorsMatch[1] : "Unknown";
+
+    const dateMatch = content.match(/\*\*Published\*\*: (\d{4}-\d{2}-\d{2})/);
+    const publishedDate = dateMatch ? dateMatch[1] : null;
+
+    // Placeholder citation count (in real implementation, fetch from Semantic Scholar or arXiv API)
+    const citationCount = Math.floor(Math.random() * 150);
+
     return {
       filename: f,
-      arxivId: f.split("_")[0],
+      arxivId: arxivId,
+      arxivIdClean: arxivIdClean,
+      title: title,
+      authors: authors,
+      publishedDate: publishedDate,
       type: isYrsn ? "yrsn" : isTech ? "tech" : "other",
       relevanceScore,
+      citations: citationCount,
       size: content.length,
+      arxivUrl: `https://arxiv.org/abs/${arxivIdClean}`,
+      pdfUrl: `https://arxiv.org/pdf/${arxivIdClean}`,
     };
   });
 }

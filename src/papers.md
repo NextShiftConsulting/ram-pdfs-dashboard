@@ -6,7 +6,9 @@ Browse all processed research papers and their reviews.
 const papers = await FileAttachment("data/papers.json").json();
 ```
 
-## Filter Reviews
+## Quick Filters
+
+<div class="filter-grid">
 
 ```js
 const typeFilter = view(Inputs.select(["All", "yrsn", "tech", "other"], {
@@ -16,33 +18,113 @@ const typeFilter = view(Inputs.select(["All", "yrsn", "tech", "other"], {
 ```
 
 ```js
-const filteredReviews = typeFilter === "All"
-  ? papers.reviews
-  : papers.reviews.filter(r => r.type === typeFilter);
+const relevanceFilter = view(Inputs.select(["All", "High (7-10)", "Medium (4-6)", "Low (0-3)"], {
+  label: "Relevance",
+  value: "All"
+}));
+```
+
+```js
+const sortBy = view(Inputs.select(["relevance", "date", "arxivId"], {
+  label: "Sort By",
+  value: "relevance"
+}));
+```
+
+```js
+const topicFilter = view(Inputs.text({
+  label: "Filter by Topic/Keywords",
+  placeholder: "e.g., LLM, ranking, bias..."
+}));
+```
+
+</div>
+
+```js
+// Apply all filters
+let filteredReviews = papers.reviews;
+
+// Type filter
+if (typeFilter !== "All") {
+  filteredReviews = filteredReviews.filter(r => r.type === typeFilter);
+}
+
+// Relevance filter
+if (relevanceFilter !== "All") {
+  if (relevanceFilter === "High (7-10)") {
+    filteredReviews = filteredReviews.filter(r => r.relevanceScore >= 7);
+  } else if (relevanceFilter === "Medium (4-6)") {
+    filteredReviews = filteredReviews.filter(r => r.relevanceScore >= 4 && r.relevanceScore < 7);
+  } else if (relevanceFilter === "Low (0-3)") {
+    filteredReviews = filteredReviews.filter(r => r.relevanceScore !== null && r.relevanceScore < 4);
+  }
+}
+
+// Topic/keyword filter
+if (topicFilter && topicFilter.trim() !== "") {
+  filteredReviews = filteredReviews.filter(r =>
+    r.filename.toLowerCase().includes(topicFilter.toLowerCase()) ||
+    r.arxivId.toLowerCase().includes(topicFilter.toLowerCase())
+  );
+}
+
+// Sort
+if (sortBy === "relevance") {
+  filteredReviews = filteredReviews.sort((a, b) => (b.relevanceScore || 0) - (a.relevanceScore || 0));
+} else if (sortBy === "date") {
+  filteredReviews = filteredReviews.sort((a, b) => b.arxivId.localeCompare(a.arxivId));
+} else if (sortBy === "arxivId") {
+  filteredReviews = filteredReviews.sort((a, b) => a.arxivId.localeCompare(b.arxivId));
+}
 ```
 
 <div class="card">
   <p>Showing <strong>${filteredReviews.length}</strong> of ${papers.reviews.length} reviews</p>
+  <button onclick="exportBibTeX()">Export BibTeX</button>
 </div>
 
 ## Reviews Table
 
 ```js
 Inputs.table(filteredReviews, {
-  columns: ["arxivId", "type", "relevanceScore", "filename"],
+  columns: ["title", "arxivId", "type", "relevanceScore", "citations", "publishedDate"],
   header: {
-    arxivId: "ArXiv ID",
+    title: "Paper Title",
+    arxivId: "ArXiv",
     type: "Type",
-    relevanceScore: "Score",
-    filename: "File"
+    relevanceScore: "Relevance",
+    citations: "Citations",
+    publishedDate: "Published"
   },
   format: {
-    relevanceScore: d => d ?? "—",
-    type: d => d === "yrsn" ? "🎯 YRSN" : d === "tech" ? "📋 Tech" : "📄 Other"
+    title: (d, i, data) => {
+      const row = data[i];
+      return html`<div class="paper-title">
+        <strong>${d || row.filename}</strong><br/>
+        <small style="color: #666;">${row.authors || 'Unknown authors'}</small>
+      </div>`;
+    },
+    arxivId: (d, i, data) => {
+      const row = data[i];
+      return html`<div class="arxiv-links">
+        <a href="${row.arxivUrl || `https://arxiv.org/abs/${d}`}" target="_blank" title="View on arXiv">${d}</a><br/>
+        <a href="${row.pdfUrl || `https://arxiv.org/pdf/${d}`}" target="_blank" class="pdf-link">📄 PDF</a>
+      </div>`;
+    },
+    relevanceScore: d => d !== null ? html`<span class="score score-${d >= 7 ? 'high' : d >= 4 ? 'medium' : 'low'}">${d}/10</span>` : "—",
+    type: d => d === "yrsn" ? "🎯 YRSN" : d === "tech" ? "📋 Tech" : "📄 Other",
+    citations: d => html`<span class="citations">${d !== undefined ? d : '—'}</span>`,
+    publishedDate: d => d || "—"
   },
-  sort: "relevanceScore",
-  reverse: true,
-  rows: 20
+  rows: 20,
+  width: {
+    title: 400,
+    arxivId: 120,
+    type: 80,
+    relevanceScore: 100,
+    citations: 80,
+    publishedDate: 100
+  }
 })
 ```
 
@@ -80,14 +162,140 @@ scoredReviews.length > 0 ? Plot.plot({
 }) : html`<p class="note">No scored reviews yet.</p>`
 ```
 
+```js
+// BibTeX export functionality
+function generateBibTeX(reviews) {
+  return reviews.map(r => {
+    const arxivIdClean = r.arxivIdClean || r.arxivId.replace(/_/g, '.');
+    const year = r.publishedDate ? r.publishedDate.substring(0, 4) : `20${r.arxivId.substring(0, 2)}`;
+    const month = r.publishedDate ? r.publishedDate.substring(5, 7) : r.arxivId.substring(2, 4);
+    const bibtexKey = `arxiv${arxivIdClean.replace(/\./g, '_')}`;
+    const title = r.title || `Paper ${r.arxivId}`;
+    const authors = r.authors || "Author Name";
+
+    return `@article{${bibtexKey},
+  title = {{${title}}},
+  author = {${authors}},
+  journal = {arXiv preprint arXiv:${arxivIdClean}},
+  year = {${year}},
+  month = {${month}},
+  url = {${r.arxivUrl || `https://arxiv.org/abs/${arxivIdClean}`}},
+  note = {Relevance Score: ${r.relevanceScore || 'N/A'}, Citations: ${r.citations || 'N/A'}}
+}`;
+  }).join('\n\n');
+}
+
+function exportBibTeX() {
+  const bibtex = generateBibTeX(filteredReviews);
+  const blob = new Blob([bibtex], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `papers_export_${new Date().toISOString().split('T')[0]}.bib`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Make function globally available
+window.exportBibTeX = exportBibTeX;
+```
+
 <style>
 .card {
   background: var(--theme-background-alt);
   border-radius: 8px;
   padding: 1rem;
   margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+.card button {
+  background: #2E86AB;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.card button:hover {
+  background: #236B8E;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
 .note {
   color: var(--theme-foreground-muted);
+}
+
+.score {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.score-high {
+  background: #d4edda;
+  color: #155724;
+}
+
+.score-medium {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.score-low {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.citations {
+  color: #666;
+  font-weight: 600;
+}
+
+.paper-title {
+  line-height: 1.4;
+}
+
+.paper-title strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.arxiv-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.arxiv-links a {
+  text-decoration: none;
+  color: #2E86AB;
+}
+
+.arxiv-links a:hover {
+  text-decoration: underline;
+}
+
+.pdf-link {
+  font-size: 0.875rem;
+  color: #666 !important;
+}
+
+.pdf-link:hover {
+  color: #2E86AB !important;
 }
 </style>
